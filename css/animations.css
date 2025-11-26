@@ -1,0 +1,224 @@
+/* cursor style */
+
+/* Big main dot */
+.cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    transition: background 0.2s ease;
+}
+
+/* Red inner circle */
+.cursor-inner {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 3px solid red;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s ease, height 0.25s ease;
+}
+
+/* Blue outer circle */
+.cursor-outer {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #4a9fff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.7;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
+}
+
+/* HOVER EFFECT — dot invisible, circles expand */
+.cursor-hover .cursor-dot {
+    background: transparent;
+}
+
+.cursor-hover .cursor-inner {
+    width: 70px;
+    height: 70px;
+}
+
+.cursor-hover .cursor-outer {
+    width: 110px;
+    height: 110px;
+    opacity: 1;
+}
+
+
+/* ---------------------------------Hero Part----------------------------- */
+
+.hero-animated-text {
+    opacity: 0;
+}
+
+.hero-animated-text span {
+    display: inline-block;
+}
+
+@keyframes heroReveal {
+    to {
+        opacity: 1;
+        transform: translateX(0) skewX(0deg);
+        filter: blur(0px);
+    }
+}
+
+/* --------------------------Hero Subtitle---------------------------- */
+
+/* Initial hidden state for hero-subtext */
+.hero-subtext {
+    opacity: 0;
+    transform: translateX(-40px) skewX(8deg);
+    filter: blur(10px);
+}
+
+/* Visible animation state */
+.hero-subtext.visible {
+    animation: heroSubtextReveal 0.9s cubic-bezier(.16, .84, .44, 1) forwards;
+}
+
+/* Keyframes (similar to hero title) */
+@keyframes heroSubtextReveal {
+    to {
+        opacity: 1;
+        transform: translateX(0) skewX(0deg);
+        filter: blur(0);
+    }
+}
+
+/* ---------------------------Hero Buttons------------------------ */
+
+/* Parent container initially hidden */
+.hero-buttons {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+}
+
+/* When visible (scroll-trigger) */
+.hero-buttons.visible {
+    animation: heroButtonsParent 0.6s cubic-bezier(.25, .46, .45, .94) forwards;
+}
+
+@keyframes heroButtonsParent {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* ---- Individual button animations ---- */
+.hero-buttons .btn {
+    opacity: 0;
+    transform: translateY(15px) scale(0.85);
+    filter: blur(6px);
+}
+
+/* Buttons visible after parent reveal */
+.hero-buttons.visible .btn {
+    animation: heroButtonReveal 0.45s cubic-bezier(.25, .46, .45, .94) forwards;
+}
+
+@keyframes heroButtonReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Stagger timing */
+.hero-buttons.visible .btn:nth-child(1) {
+    animation-delay: 0.20s;
+}
+
+.hero-buttons.visible .btn:nth-child(2) {
+    animation-delay: 0.35s;
+}
+
+/* ----------------------Features View------------------------------ */
+.count {
+    display: inline-block;
+    font-weight: 700;
+    opacity: 1;
+    transition: color .3s ease;
+}
+
+.count.active {
+    color: #ffffff;
+    /* highlight when done */
+}
+
+.text-note {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.5s ease, transform 1s ease;
+}
+
+.text-note.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ----------------------Company Info------------------------ */
+
+/* Initial hidden state */
+.company-info-text {
+    opacity: 0;
+    transform: translateX(-200px);
+    /* filter: blur(12px); */
+    transition: opacity 3s cubic-bezier(.16, .84, .44, 1),
+        transform 3s cubic-bezier(.16, .84, .44, 1),
+        filter 3s ease-out;
+}
+
+.why-item {
+    opacity: 0;
+    transform: translateY(100px);
+    /* filter: blur(12px); */
+    transition: opacity 3s cubic-bezier(.16, .84, .44, 1),
+        transform 3s cubic-bezier(.16, .84, .44, 1),
+        filter 3s ease-out;
+}
+
+/* Visible state */
+.company-info-text.visible,
+.why-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+    /* filter: blur(0); */
+}
+
+/* ----------------View More Button-------------------- */
+
+/* Hidden initial state */
+.btn-more {
+    opacity: 0;
+    transform: translateX(-100px);
+    filter: blur(3px);
+    transition:
+        opacity 1s cubic-bezier(.22, 1, .36, 1),
+        transform 3s cubic-bezier(.22, 1, .36, 1),
+        filter 1s ease;
+}
+
+/* Visible state */
+.btn-more.visible {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+}

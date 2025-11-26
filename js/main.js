@@ -1,0 +1,20 @@
+// Header visible / invisible
+document.addEventListener("DOMContentLoaded", () => {
+    let lastScroll = 0;
+    const header = document.querySelector("header");
+
+    window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 300 && currentScroll > lastScroll) {
+            // scrolling down → hide
+            header.classList.add("hidden");
+        } else {
+            // scrolling up or near top → show
+            header.classList.remove("hidden");
+        }
+
+        lastScroll = currentScroll;
+    });
+});
+

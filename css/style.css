@@ -1,0 +1,995 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body {
+    font-family: rodin-light, osaka, sans-serif;
+    overflow-x: clip;
+}
+
+.chat-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+
+    background: #6D4BFF;
+    color: #ffffff;
+    text-decoration: none;
+
+    padding: 0.8rem 1.6rem;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+
+    box-shadow: 0 2px 4px rgba(109, 75, 255, 0.4);
+    transition: all 0.25s ease;
+    z-index: 999;
+}
+
+/* Hover effect */
+.chat-button:hover {
+    background: #8B68FF;
+    transform: translateY(-3px);
+    box-shadow: 0 2px 5px rgba(139, 104, 255, 0.5);
+}
+
+.chat-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Header Logo + Navbar Style */
+
+header {
+    padding-inline: 1rem;
+    width: 100%;
+    background-color: transparent;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+header.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.logo {
+    padding: 0rem 2rem;
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-image {
+    width: 50px;
+    height: 50px;
+    background: url("../assets/images/logo.avif") center center / cover no-repeat;
+}
+
+.logo-text {
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background-color: transparent;
+    position: relative;
+}
+
+.nav-item {
+    background: #0d0d16;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.6rem 1.3rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: #1e1e2f;
+    transform: translateY(-2px);
+}
+
+.nav-item.cta {
+    background: #6D4BFF;
+    color: #fff;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.nav-item.cta:hover {
+    background: #8B68FF;
+}
+
+/* Dropdown menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0d0d16;
+    border-radius: 30px;
+    margin-top: 5px;
+    min-width: 120px;
+    text-align: center;
+}
+
+.dropdown-content a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    transition: background 0.3s;
+}
+
+.dropdown-content a:hover {
+    background: #1e1e2f;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Hero Part Style */
+.hero {
+    width: 100%;
+    height: 100vh;
+    background: url("../assets/images/logo.avif") center center / cover no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    padding-top: 150px;
+    z-index: 3;
+}
+
+/* Make everything inside hero scroll normally */
+.hero>* {
+    position: relative;
+}
+
+@supports (-webkit-touch-callout: none) {
+
+    /* iOS fallback */
+    .hero {
+        background-attachment: scroll;
+        background-position: center center;
+    }
+}
+
+.hero-text {
+    color: white;
+    margin-left: 50px;
+    font-size: 2em;
+}
+
+.hero-subtext {
+    font-size: 1.75rem;
+    position: absolute;
+    bottom: 280px;
+    margin-left: 50px;
+    color: white;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-left: 50px;
+    position: absolute;
+    bottom: 200px;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn.primary {
+    background: #6D4BFF;
+    color: #fff;
+}
+
+.btn.primary:hover {
+    color: #8B68FF;
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(109, 75, 255, 0.3);
+}
+
+.btn.secondary {
+    background: #1E1E2F;
+    color: #fff;
+}
+
+.btn.secondary:hover {
+    color: #2B2B3E;
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(29, 26, 26, 0.4);
+}
+
+.features-view {
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+    font-family: 'Noto Sans JP', sans-serif;
+    padding-inline: 100px;
+}
+
+.features {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: #232333;
+    padding: 1.5rem 2rem;
+    border-radius: 4px;
+    gap: 1rem;
+}
+
+.feature {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-color: #232333;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25rem;
+    padding: 1rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.feature:hover {
+    cursor: pointer;
+    background-color: #2e2e3e;
+    transform: translateY(-3px);
+}
+
+.feature .line {
+    display: block;
+    width: 4px;
+    height: 40px;
+    background: #6D4BFF;
+    border-radius: 2px;
+    margin-right: 1rem;
+}
+
+.feature p {
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Homepage Second - Company Info */
+
+.company-info {
+    width: 100%;
+    height: 90vh;
+    background: url("../assets/images/director.avif") center center / cover no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 2;
+}
+
+/* Make everything inside hero scroll normally */
+.company-info>* {
+    position: relative;
+    z-index: 1;
+}
+
+.text-note {
+    position: absolute;
+    margin-left: 100px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 340px;
+    height: 55px;
+    background-color: white;
+    font-size: 1.25rem;
+    padding-inline-start: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 0;
+}
+
+#note2 {
+    z-index: 0;
+}
+
+.company-info-text {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: left;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+    margin-left: 50px;
+}
+
+.btn-more {
+    position: absolute;
+    bottom: 50px;
+    margin-left: 50px;
+}
+
+.company-reason {
+    width: 100%;
+    height: 100vh;
+    background: url("../assets/images/reason-back.avif") center center / cover no-repeat;
+}
+
+/* Section container */
+.company-reason-text {
+    width: 100%;
+    height: 100%;
+    padding: 5rem 2rem;
+    background-image: url("assets/images/green-bg.avif");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    justify-content: left;
+    align-items: center;
+}
+
+/* Grid layout */
+.why-grid {
+    width: fit-content;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    margin-top: 50px;
+    margin-left: 70px;
+}
+
+/* Each item */
+.why-item {
+    color: white;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* Title */
+.why-item h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+/* Description */
+.why-item p {
+    font-size: 1.25rem;
+    line-height: 1.7;
+}
+
+.why-item>* {
+    margin-bottom: 50px;
+}
+
+.rect {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border: white 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rect svg path {
+    fill: white !important;
+}
+
+
+/* =========================== NEWS ============================ */
+
+.news {
+    width: 100%;
+    padding: 20px 50px;
+}
+
+.news-heading {
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.news-container {
+    position: relative;
+    width: 100%;
+    padding: 0px 50px;
+    display: flex;
+}
+
+.news-left {
+    width: 300px;
+}
+
+.news-sns {
+    background-color: #242834;
+    height: 300px;
+    padding-bottom: 30px;
+    gap: 30px;
+    font-weight: bold;
+    border-bottom-left-radius: 25px;
+}
+
+.news-video {
+    width: 100%;
+    height: 250px;
+    border: 6px solid #0094ff;
+    border-top-left-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.news-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* PLAY BUTTON */
+.play-btn {
+    border: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 60px;
+    height: 40px;
+    background: rgba(255, 0, 0, 0.9);
+    border-radius: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.play-btn:hover {
+    background: rgba(255, 40, 40, 1);
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+}
+
+.news-video img {
+    width: 100%;
+}
+
+.sns-text {
+    font-size: 50px;
+    color: white;
+}
+
+.sns-btn {
+    gap: 20px;
+}
+
+.sns-btn a {
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 2px white solid;
+    border-radius: 25px;
+    font-size: 14px;
+    color: white;
+}
+
+/* ========================== NEWS RIGHT ========================== */
+
+.news-right {
+    background-color: #ececec;
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 50px 20px;
+    gap: 40px;
+    border-right: 30px solid #242834;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.news-item {
+    width: 33%;
+    max-width: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.news-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.news-item h4 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.news-item p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* VIEW MORE */
+
+.news-more {
+    position: absolute;
+    text-align: right;
+    bottom: 50px;
+    right: 100px;
+}
+
+.news-more a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid black;
+    padding-bottom: 2px;
+}
+
+/* =============== BUSINESS SECTION =============== */
+
+.business {
+    width: 100%;
+    padding: 60px 40px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.business-title {
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.business-list {
+    padding: 0px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Each block */
+.business-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+
+.business-item.reverse {
+    flex-direction: row-reverse;
+}
+
+
+/* Text */
+.biz-text {
+    background-color: #ececec;
+    width: 50%;
+    height: 90%;
+    flex: 1;
+    padding: 50px;
+    width: 50%;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.reverse .biz-text {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.biz-text h3 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.biz-text p {
+    font-size: 20px;
+    line-height: 1.7;
+    color: #444;
+}
+
+/* Image + diagonal line */
+.biz-image {
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+.biz-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 1024px) {
+    .business-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .business-item.reverse {
+        flex-direction: column;
+    }
+
+    .biz-image {
+        width: 90%;
+        height: 200px;
+    }
+
+    .biz-line {
+        display: none;
+        /* Hide diagonal on tablet */
+    }
+}
+
+@media (max-width: 600px) {
+    .business {
+        padding: 40px 20px;
+    }
+
+    .business-title {
+        font-size: 32px;
+    }
+
+    .biz-text h3 {
+        font-size: 18px;
+    }
+
+    .biz-text p {
+        font-size: 14px;
+    }
+
+    .biz-image {
+        width: 100%;
+        height: 180px;
+    }
+}
+
+/* =========================== Footer ============================ */
+
+footer {
+    width: 100%;
+    height: 100vh;
+    background-color: #242834;
+}
+
+
+/* ==================== Responsive ==================== */
+
+/* =============== 1281px–1440px =============== */
+@media (max-width:1440px) {
+    .news-left {
+        width: 300px;
+    }
+}
+
+/* =============== 1025px–1280px =============== */
+@media (max-width: 1280px) {
+    header {
+        padding-inline: 16px;
+    }
+
+    .logo {
+        padding-inline: 20px;
+        font-size: 16px;
+    }
+
+    .nav {
+        padding-inline: 20px;
+    }
+
+    .nav-item {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding-top: 120px;
+    }
+
+    .hero-animated-text {
+        font-size: 58px;
+    }
+
+    .hero-subtext {
+        font-size: 24px;
+        bottom: 240px;
+    }
+
+    .hero-buttons {
+        bottom: 160px;
+    }
+
+    .features-view {
+        padding-inline: 60px;
+    }
+
+    .features {
+        padding: 16px 24px;
+    }
+
+    .feature p {
+        font-size: 16px;
+    }
+
+    .feature {
+        padding-inline: 10px;
+    }
+
+    .company-info-text span {
+        font-size: 40px;
+    }
+
+    .btn-more {
+        bottom: 24px;
+    }
+
+    .text-note {
+        margin-left: 54px;
+    }
+
+    .company-reason-text {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 64px 24px;
+    }
+
+    .why-item h3,
+    .why-item p {
+        font-size: 18px;
+    }
+
+    .why-item h3 {
+        margin-bottom: 30px;
+    }
+
+
+}
+
+/* =============== 0px–1024px =============== */
+@media (max-width: 1024px) {
+    header {
+        padding-inline: 12px;
+    }
+
+    .logo {
+        padding-inline: 16px;
+        font-size: 14px;
+    }
+
+    .nav {
+        padding-inline: 16px;
+    }
+
+    .nav-item {
+        font-size: 12px;
+    }
+
+    .hero {
+        padding-top: 90px;
+    }
+
+    .hero-animated-text {
+        font-size: 52px;
+    }
+
+    .hero-subtext {
+        font-size: 24px;
+        bottom: 240px;
+    }
+
+    .hero-buttons {
+        bottom: 160px;
+    }
+
+    .features-view {
+        padding-inline: 50px;
+    }
+
+    .features {
+        padding: 12px 20px;
+    }
+
+    .feature p {
+        font-size: 14px;
+    }
+
+    .feature {
+        padding-inline: 0px;
+    }
+
+    .chat-button {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .company-info-text span {
+        font-size: 36px;
+    }
+
+    .btn-more {
+        bottom: 20px;
+    }
+
+    .text-note {
+        margin-left: 50px;
+    }
+
+    .company-reason-text {
+        padding: 60px 20px;
+    }
+
+    .why-item h3,
+    .why-item p {
+        font-size: 16px;
+    }
+
+    .why-item h3 {
+        margin-bottom: 25px;
+    }
+}
+
+/*================== News =================== */
+@media (min-width: 1024px) and (max-width: 1280px) {
+    .news {
+        padding-inline: 30px;
+    }
+
+    .news-left {
+        width: 220px;
+    }
+
+    .news-sns {
+        height: 250px;
+    }
+
+    .news-container {
+        padding-inline: 10px;
+    }
+
+    .sns-text {
+        font-size: 36px;
+    }
+
+    .sns-btn a {
+        font-size: 12px;
+    }
+
+    .sns-btn {
+        gap: 10px;
+    }
+
+    .news-item-text h4 {
+        font-size: 14px;
+    }
+
+    .news-item-text p {
+        font-size: 12px;
+    }
+
+    .news-right {
+        padding: 30px 20px;
+    }
+
+    .news-more {
+        right: 80px;
+    }
+
+    .news-more a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-container {
+        flex-direction: column;
+    }
+
+    .news-left {
+        width: 100%;
+    }
+
+    .news-video {
+        border-top-right-radius: 25px;
+    }
+
+    .news-sns {
+        border-bottom-left-radius: 0%;
+    }
+
+    .news-right {
+        flex-direction: column;
+        border-right: none;
+        border-radius: 0;
+        border-bottom: 30px solid #242834;
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+
+    .news-more {
+        bottom: 80px;
+        right: 80px;
+    }
+
+    .news-item {
+        width: 100%;
+        align-items: flex-start;
+    }
+}
