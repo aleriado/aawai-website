@@ -1,0 +1,136 @@
+main {
+    background-color: black;
+}
+
+.services-top {
+    width: 100%;
+    height: 100vh;
+    padding: 60px 100px;
+    color: white;
+    font-family: 'Noto Sans JP', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.services-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.services-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0px;
+    /* 画像と同じく線で区切るため gap=0 */
+    border: 1px solid #34363f;
+}
+
+.service-box {
+    padding: 40px;
+    border-bottom: 1px solid #3a3d47;
+    border-right: 1px solid #3a3d47;
+    background-color: #2b2d36;
+    position: relative;
+}
+
+.service-box:nth-child(2),
+.service-box:nth-child(4) {
+    border-right: none;
+}
+
+.service-box:nth-child(3),
+.service-box:nth-child(4) {
+    border-bottom: none;
+}
+
+.service-line {
+    width: 6px;
+    height: 40px;
+    background: #6D4BFF;
+    border-radius: 4px;
+    position: absolute;
+    left: 70px;
+    top: 40px;
+}
+
+.service-box h3 {
+    font-size: 1.4rem;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.service-box p {
+    max-width: 400px;
+    margin-left: 50px;
+    line-height: 1.9;
+    font-size: 1rem;
+}
+
+.service-bottom {
+    width: 100%;
+    height: 50vh;
+    position: relative;
+
+    background-image: url('../assets/images/service.avif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-bottom::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+    /* overlay layer */
+}
+
+/* 中央コンテンツ */
+.service-center {
+    text-align: center;
+    color: white;
+    z-index: 5;
+}
+
+.service-center h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+
+.service-center p {
+    font-size: 1rem;
+    margin-bottom: 50px;
+    opacity: 0.9;
+}
+
+/* ボタン */
+.service-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #6D4BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.service-btn:hover {
+    background: #8b68ff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(109, 75, 255, 0.35);
+}
