@@ -347,7 +347,7 @@ nav {
     height: 100%;
     justify-content: left;
     align-items: center;
-    font-size: 40px;
+    font-size: 52px;
     color: white;
     margin-left: 50px;
 }
@@ -373,6 +373,7 @@ nav {
     background-size: cover;
     background-position: center;
     position: relative;
+    display: flex;
     justify-content: left;
     align-items: center;
 }
@@ -397,14 +398,14 @@ nav {
 
 /* Title */
 .why-item h3 {
-    font-size: 1.3rem;
+    font-size: 2rem;
     font-weight: 700;
     line-height: 1.5;
 }
 
 /* Description */
 .why-item p {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.7;
 }
 
@@ -432,7 +433,7 @@ nav {
 
 .news {
     width: 100%;
-    padding: 20px 50px;
+    padding: 20px 40px;
 }
 
 .news-heading {
@@ -447,10 +448,12 @@ nav {
     width: 100%;
     padding: 0px 50px;
     display: flex;
+    max-height: 550px;
 }
 
 .news-left {
     width: 300px;
+    height: 100%;
 }
 
 .news-sns {
@@ -510,6 +513,8 @@ nav {
 
 .news-video img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .sns-text {
@@ -547,7 +552,9 @@ nav {
 
 .news-item {
     width: 33%;
-    max-width: 330px;
+    height: 100%;
+    min-width: 250px;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -556,14 +563,15 @@ nav {
 
 .news-item img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    max-width: 100%;
+    height: auto;
     border-radius: 12px;
     margin-bottom: 12px;
 }
 
 .news-item h4 {
-    font-size: 24px;
+    font-size: clamp(18px, 5vw, 24px);
+    /* Minimum 18px, 5% of viewport width, maximum 24px */
     font-weight: 700;
     margin-bottom: 10px;
     color: #222;
@@ -611,7 +619,7 @@ nav {
     padding: 0px 100px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 150px;
 }
 
 /* Each block */
@@ -621,38 +629,30 @@ nav {
     background: white;
     border-radius: 20px;
     position: relative;
-    overflow: hidden;
-    height: 400px;
-}
-
-.business-item.reverse {
-    flex-direction: row-reverse;
+    min-height: 300px;
+    background-color: #ececec;
+    max-height: 360px;
 }
 
 
 /* Text */
 .biz-text {
-    background-color: #ececec;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-right: 50%;
+    padding: 100px;
     width: 50%;
-    height: 90%;
-    flex: 1;
-    padding: 50px;
-    width: 50%;
+    min-height: 370px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
 
-.reverse .biz-text {
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-}
-
 .biz-text h3 {
-    font-size: 28px;
+    font-size: 36px;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .biz-text p {
@@ -663,66 +663,14 @@ nav {
 
 /* Image + diagonal line */
 .biz-image {
-    width: 50%;
-    height: 100%;
-    position: relative;
+    width: 45%;
+    position: absolute;
+    right: 50px;
+    background-image: url('../assets/images/girlfriends.jpg');
+    background-size: cover;
+    min-height: 420px;
+    border-radius: 20px;
 }
-
-.biz-image img {
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-
-/* ======== RESPONSIVE ======== */
-@media (max-width: 1024px) {
-    .business-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-
-    .business-item.reverse {
-        flex-direction: column;
-    }
-
-    .biz-image {
-        width: 90%;
-        height: 200px;
-    }
-
-    .biz-line {
-        display: none;
-        /* Hide diagonal on tablet */
-    }
-}
-
-@media (max-width: 600px) {
-    .business {
-        padding: 40px 20px;
-    }
-
-    .business-title {
-        font-size: 32px;
-    }
-
-    .biz-text h3 {
-        font-size: 18px;
-    }
-
-    .biz-text p {
-        font-size: 14px;
-    }
-
-    .biz-image {
-        width: 100%;
-        height: 180px;
-    }
-}
-
-/* =========================== Footer ============================ */
 
 footer {
     width: 100%;
@@ -733,12 +681,6 @@ footer {
 
 /* ==================== Responsive ==================== */
 
-/* =============== 1281px–1440px =============== */
-@media (max-width:1440px) {
-    .news-left {
-        width: 300px;
-    }
-}
 
 /* =============== 1025px–1280px =============== */
 @media (max-width: 1280px) {
@@ -906,56 +848,6 @@ footer {
     }
 }
 
-/*================== News =================== */
-@media (min-width: 1024px) and (max-width: 1280px) {
-    .news {
-        padding-inline: 30px;
-    }
-
-    .news-left {
-        width: 220px;
-    }
-
-    .news-sns {
-        height: 250px;
-    }
-
-    .news-container {
-        padding-inline: 10px;
-    }
-
-    .sns-text {
-        font-size: 36px;
-    }
-
-    .sns-btn a {
-        font-size: 12px;
-    }
-
-    .sns-btn {
-        gap: 10px;
-    }
-
-    .news-item-text h4 {
-        font-size: 14px;
-    }
-
-    .news-item-text p {
-        font-size: 12px;
-    }
-
-    .news-right {
-        padding: 30px 20px;
-    }
-
-    .news-more {
-        right: 80px;
-    }
-
-    .news-more a {
-        font-size: 14px;
-    }
-}
 
 @media (max-width: 768px) {
     .news-container {
@@ -991,5 +883,28 @@ footer {
     .news-item {
         width: 100%;
         align-items: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .business {
+        padding: 40px 20px;
+    }
+
+    .business-title {
+        font-size: 32px;
+    }
+
+    .biz-text h3 {
+        font-size: 18px;
+    }
+
+    .biz-text p {
+        font-size: 14px;
+    }
+
+    .biz-image {
+        width: 100%;
+        height: 180px;
     }
 }
