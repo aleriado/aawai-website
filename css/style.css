@@ -83,6 +83,7 @@ header.hidden {
     gap: 0.8rem;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
 }
 
 .logo-image {
@@ -343,13 +344,18 @@ nav {
 
 .company-info-text {
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    justify-content: left;
-    align-items: center;
-    font-size: 52px;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 48px;
     color: white;
     margin-left: 50px;
+}
+
+.company-info-text p {
+    line-height: 2;
 }
 
 .btn-more {
@@ -642,8 +648,8 @@ nav {
     align-items: flex-start;
     flex-direction: column;
     padding-right: 50%;
-    padding: 100px;
-    width: 50%;
+    padding: 80px;
+    width: 60%;
     min-height: 370px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -652,24 +658,28 @@ nav {
 .biz-text h3 {
     font-size: 36px;
     font-weight: bold;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .biz-text p {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 1.7;
     color: #444;
 }
 
 /* Image + diagonal line */
 .biz-image {
-    width: 45%;
+    width: 40%;
     position: absolute;
     right: 50px;
-    background-image: url('../assets/images/girlfriends.jpg');
     background-size: cover;
-    min-height: 420px;
+}
+
+.biz-image img {
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
+    min-height: 400px;
 }
 
 .blog {
@@ -722,10 +732,228 @@ nav {
 
 footer {
     width: 100%;
-    height: 100vh;
-    background-color: #242834;
+    height: 50vh;
 }
 
+.service {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    background-image: url('../assets/images/biz6.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* Dark overlay BEHIND the ticket */
+.service::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+    /* overlay layer */
+}
+
+.service-banner {
+    width: 41%;
+    height: 250px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0px 20px;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.sb-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* LEFT IMAGE */
+.sb-left img {
+    width: 300px;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+/* CENTER TEXT */
+.sb-center {
+    flex: 1;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+/* BUTTON */
+.sb-right .sb-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #111;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: "Noto Sans JP", sans-serif;
+
+    transition: 0.25s ease;
+}
+
+/* BUTTON HOVER */
+.sb-right .sb-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* ROUND ICON */
+.sb-icon {
+    width: 32px;
+    height: 32px;
+    border: 2px solid white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.footer-container {
+    width: 100%;
+    height: 100%;
+    padding: 60px 80px;
+    background: #242834;
+    color: #e5e5e5;
+    font-family: 'Noto Sans JP', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Grid Layout */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    margin-bottom: 50px;
+}
+
+.footer-col h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.footer-email {
+    font-weight: 600;
+}
+
+/* お問い合わせボタン */
+.footer-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 28px;
+    background: #6D4BFF;
+    color: #fff;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.footer-btn:hover {
+    background: #8B68FF;
+    transform: translateY(-2px);
+}
+
+/* メール入力フォーム */
+.footer-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.footer-form input {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 25px;
+    border: 2px solid #555;
+    background: #242834;
+    color: white;
+    outline: none;
+}
+
+.footer-form button {
+    padding: 12px 24px;
+    border-radius: 25px;
+    background: white;
+    color: #242834;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+/* メニュー・SNS */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: #e5e5e5;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.footer-col ul li a:hover {
+    opacity: 0.7;
+}
+
+/* COPYRIGHT */
+.footer-bottom {
+    border-top: 1px solid #3a3e48;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-bottom a {
+    color: #e5e5e5;
+    text-decoration: none;
+}
 
 /* ==================== Responsive ==================== */
 

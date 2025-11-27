@@ -1,0 +1,54 @@
+.privacypolicy {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../assets/images/biz6.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+    align-items: center;
+    color: white;
+    font-family: "Noto Sans JP", sans-serif;
+    line-height: 1.9;
+}
+
+.privacypolicy::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+    /* overlay layer */
+}
+
+.privacypolicy h2 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.privacypolicy h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.privacypolicy p {
+    font-size: 1.1rem;
+}
+
+.privacypolicy ul {
+    margin-left: 20px;
+}
+
+.privacypolicy ul li {
+    font-size: 1.05rem;
+}
+
+.privacypolicy-content {
+    z-index: 2;
+}
