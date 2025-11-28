@@ -165,3 +165,107 @@ main {
     letter-spacing: 1px;
     margin-top: 4px;
 }
+
+/* ======================= */
+/* Mission Section */
+/* ======================= */
+
+.mission-section {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    padding: 80px;
+    background: url("../assets/images/mission.avif") center center / cover no-repeat fixed;
+    background-size: cover;
+    color: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* === Dark Overlay === */
+.mission-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(1px);
+    z-index: 0;
+}
+
+/* Make content above overlay */
+.mission-section>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* White label */
+.mission-note {
+    margin-left: 0;
+    margin-bottom: 40px;
+    position: absolute;
+    top: 0px;
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Main text */
+.mission-title {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.5;
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.mission-subtext {
+    font-size: 18px;
+    line-height: 1.8;
+    opacity: 0.85;
+    margin-bottom: 60px;
+}
+
+/* Core Values Section */
+.core-values {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.value-box {
+    flex: 1;
+    background: rgba(10, 10, 20, 0.55);
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+}
+
+.value-box h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.value-line {
+    display: inline-block;
+    width: 4px;
+    height: 30px;
+    background: #6D4BFF;
+    border-radius: 3px;
+    margin-right: 12px;
+}
+
+.value-box p {
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: 0.9;
+    max-width: 230px;
+}
