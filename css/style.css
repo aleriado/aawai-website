@@ -1,9 +1,26 @@
+/* =================== GLOBAL RESET =================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Noto Sans JP', rodin-light, osaka, sans-serif;
+    overflow-x: hidden;
+    font-size: clamp(14px, 1vw, 18px);
+    line-height: 1.6;
+    background: #05060a;
+    color: #fff;
+}
+
+/* =================== FLEX HELPERS =================== */
 .row {
     display: flex;
     justify-content: center;
@@ -12,62 +29,53 @@
 
 .col {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
-body {
-    font-family: rodin-light, osaka, sans-serif;
-    overflow-x: clip;
-}
-
+/* =================== CHAT BUTTON =================== */
 .chat-button {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-
+    bottom: clamp(16px, 2vw, 30px);
+    right: clamp(16px, 2vw, 30px);
     background: #6D4BFF;
     color: #ffffff;
     text-decoration: none;
-
-    padding: 0.8rem 1.6rem;
+    padding: clamp(8px, 0.9vw, 12px) clamp(16px, 1.6vw, 24px);
     border-radius: 12px;
-
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1rem;
+    gap: clamp(6px, 0.8vw, 10px);
+    font-size: clamp(13px, 1vw, 16px);
     font-weight: 600;
-
     box-shadow: 0 2px 4px rgba(109, 75, 255, 0.4);
     transition: all 0.25s ease;
     z-index: 999;
 }
 
-/* Hover effect */
 .chat-button:hover {
     background: #8B68FF;
     transform: translateY(-3px);
-    box-shadow: 0 2px 5px rgba(139, 104, 255, 0.5);
+    box-shadow: 0 2px 6px rgba(139, 104, 255, 0.6);
 }
 
-.chat-icon {
-    font-size: 1.2rem;
-    line-height: 1;
+@media (max-width:768px) {
+    .chat-button p {
+        display: none;
+    }
 }
 
-/* Header Logo + Navbar Style */
-
+/* =================== HEADER =================== */
 header {
-    padding-inline: 1rem;
     width: 100%;
-    background-color: transparent;
-    position: fixed;
+    padding-inline: clamp(12px, 2vw, 32px);
+    padding-block: clamp(8px, 1vw, 16px);
+    background: transparent;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    position: fixed;
     z-index: 100;
     transition: transform 0.4s ease, opacity 0.4s ease;
 }
@@ -77,44 +85,45 @@ header.hidden {
     opacity: 0;
 }
 
+/* logo */
 .logo {
-    padding: 0rem 2rem;
     display: flex;
-    gap: 0.8rem;
+    gap: clamp(6px, 0.8vw, 12px);
     justify-content: center;
     align-items: center;
+    padding-inline: clamp(8px, 1.5vw, 32px);
     text-decoration: none;
 }
 
 .logo-image {
-    width: 50px;
-    height: 50px;
-    background: url("../assets/images/logo.avif") center center / cover no-repeat;
+    width: clamp(32px, 3.5vw, 50px);
+    height: clamp(32px, 3.5vw, 50px);
+    background: url("../assets/images/logo.avif") center/cover no-repeat;
 }
 
 .logo-text {
-    color: white;
+    color: #fff;
     display: flex;
     flex-direction: column;
+    font-size: clamp(12px, 1vw, 16px);
 }
 
+/* nav */
 nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 0.8rem;
-    padding: 1rem 2rem;
-    background-color: transparent;
-    position: relative;
+    gap: clamp(6px, 0.9vw, 12px);
+    padding-inline: clamp(8px, 1.8vw, 32px);
 }
 
 .nav-item {
     background: #0d0d16;
     color: #fff;
     text-decoration: none;
-    padding: 0.6rem 1.3rem;
-    border-radius: 30px;
-    font-size: 0.9rem;
+    padding: clamp(6px, 0.9vw, 10px) clamp(14px, 1.5vw, 24px);
+    border-radius: 999px;
+    font-size: clamp(11px, 0.9vw, 14px);
     transition: all 0.3s ease;
 }
 
@@ -125,16 +134,14 @@ nav {
 
 .nav-item.cta {
     background: #6D4BFF;
-    color: #fff;
     font-weight: 600;
-    margin-left: 0.5rem;
 }
 
 .nav-item.cta:hover {
     background: #8B68FF;
 }
 
-/* Dropdown menu */
+/* dropdown */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -148,9 +155,10 @@ nav {
     transform: translateX(-50%);
     background: #0d0d16;
     border-radius: 30px;
-    margin-top: 5px;
-    min-width: 120px;
+    margin-top: 4px;
+    min-width: clamp(110px, 9vw, 150px);
     text-align: center;
+    padding-block: 4px;
 }
 
 .dropdown-content a {
@@ -158,7 +166,7 @@ nav {
     color: #fff;
     text-decoration: none;
     padding: 0.5rem 0.8rem;
-    font-size: 0.85rem;
+    font-size: clamp(11px, 0.9vw, 14px);
     border-radius: 20px;
     transition: background 0.3s;
 }
@@ -171,60 +179,149 @@ nav {
     display: block;
 }
 
-/* Hero Part Style */
-.hero {
+/*===================== Mobile Mode Header ================== */
+/* Hamburger button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 200;
+}
+
+.hamburger span {
+    box-shadow: 0px 1px 3px #2B2B3E;
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+/* Transform to X when opened */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile sidebar */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* initially hidden */
     width: 100%;
     height: 100vh;
-    background: url("../assets/images/logo.avif") center center / cover no-repeat;
-    background-attachment: fixed;
-    position: relative;
-    padding-top: 150px;
-    z-index: 3;
+    backdrop-filter: blur(10px);
+    background: rgba(13, 13, 22, 0.6);
+    padding: 80px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: right 0.4s ease;
+    z-index: 150;
 }
 
-/* Make everything inside hero scroll normally */
-.hero>* {
-    position: relative;
+.mobile-menu a {
+    text-align: center;
+    color: white;
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding: 10px 0;
 }
 
-@supports (-webkit-touch-callout: none) {
+.mobile-menu a:hover {
+    color: #6D4BFF;
+}
 
-    /* iOS fallback */
-    .hero {
-        background-attachment: scroll;
-        background-position: center center;
+.mobile-menu a.cta {
+    background: #6D4BFF;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.mobile-menu a.cta:hover {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
     }
 }
 
+.mobile-menu.open {
+    right: 0;
+}
+
+
+
+/* =================== HERO =================== */
+.hero {
+    width: 100%;
+    height: min(100vh, 920px);
+    background: url("../assets/images/logo.avif") center/cover no-repeat fixed;
+    position: relative;
+    padding-top: clamp(90px, 10vw, 100px);
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .hero {
+        background-attachment: scroll;
+        background-position: center;
+    }
+}
+
+.hero-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(16px, 2.2vw, 25px);
+    padding-bottom: clamp(16px, 2.2vw, 25px);
+}
+
 .hero-text {
-    color: white;
-    margin-left: 50px;
-    font-size: 2em;
+    color: #fff;
+    margin-left: clamp(16px, 4vw, 50px);
+    font-size: clamp(12px, 2vw, 30px);
 }
 
 .hero-subtext {
-    font-size: 1.75rem;
-    position: absolute;
-    bottom: 280px;
-    margin-left: 50px;
-    color: white;
+    font-size: clamp(16px, 2.2vw, 25px);
+    margin-left: clamp(20px, 4vw, 50px);
+    color: #fff;
+    padding-right: clamp(10px, 2vw, 15px);
 }
 
 .hero-buttons {
+    margin-left: clamp(20px, 4vw, 50px);
     display: flex;
-    gap: 1rem;
-    margin-left: 50px;
-    position: absolute;
-    bottom: 200px;
+    gap: clamp(10px, 2vw, 20px);
 }
 
 .btn {
     display: inline-block;
     text-decoration: none;
-    padding: 0.9rem 2rem;
+    padding: clamp(10px, 1vw, 16px) clamp(20px, 2vw, 32px);
     border-radius: 999px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.95rem;
+    font-size: clamp(12px, 1.1vw, 16px);
     font-weight: 600;
     transition: all 0.3s ease;
 }
@@ -236,7 +333,7 @@ nav {
 
 .btn.primary:hover {
     color: #8B68FF;
-    background-color: white;
+    background: #fff;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(109, 75, 255, 0.3);
 }
@@ -248,28 +345,29 @@ nav {
 
 .btn.secondary:hover {
     color: #2B2B3E;
-    background-color: white;
+    background: #fff;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(29, 26, 26, 0.4);
 }
 
+/* =================== HERO FEATURES =================== */
 .features-view {
     width: 100%;
-    position: absolute;
-    bottom: 20px;
+    padding-inline: clamp(16px, 5vw, 100px);
     font-family: 'Noto Sans JP', sans-serif;
-    padding-inline: 100px;
 }
 
 .features {
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
     justify-content: space-between;
     align-items: stretch;
     background-color: #232333;
-    padding: 1.5rem 2rem;
+
+    padding: clamp(12px, 1.6vw, 24px) clamp(0px, 2vw, 32px);
     border-radius: 4px;
-    gap: 1rem;
+    gap: clamp(0px, 1.8vw, 16px);
 }
 
 .feature {
@@ -279,8 +377,8 @@ nav {
     background-color: #232333;
     color: #fff;
     font-weight: 600;
-    font-size: 1.25rem;
-    padding: 1rem 1.2rem;
+    font-size: clamp(12px, 1.4vw, 20px);
+    padding: clamp(0px, 1.2vw, 18px);
     border-radius: 4px;
     transition: all 0.3s ease;
 }
@@ -294,52 +392,59 @@ nav {
 .feature .line {
     display: block;
     width: 4px;
-    height: 40px;
+    height: clamp(28px, 4vw, 40px);
     background: #6D4BFF;
     border-radius: 2px;
     margin-right: 1rem;
 }
 
 .feature p {
-    line-height: 1.6;
     margin: 0;
+    line-height: 1.6;
 }
 
-/* Homepage Second - Company Info */
+/* 数字カウンタ用 */
+.count {
+    display: inline-block;
+    font-weight: 700;
+}
 
+@media (max-width:768px) {
+    .features {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+}
+
+/* =================== SECTION NOTE LABEL =================== */
+.text-note {
+    position: absolute;
+    margin-left: clamp(20px, 5vw, 100px);
+    display: flex;
+    align-items: center;
+    width: clamp(200px, 18vw, 340px);
+    height: clamp(36px, 4vw, 55px);
+    background-color: #fff;
+    font-size: clamp(14px, 1.3vw, 20px);
+    padding-inline-start: clamp(12px, 1.4vw, 20px);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #111;
+}
+
+/* =================== COMPANY INFO =================== */
 .company-info {
+    display: flex;
     width: 100%;
-    height: 90vh;
-    background: url("../assets/images/director.avif") center center / cover no-repeat;
-    background-attachment: fixed;
+    height: min(90vh, 900px);
+    background: url("../assets/images/director.avif") center/cover no-repeat fixed;
     position: relative;
     z-index: 2;
 }
 
-/* Make everything inside hero scroll normally */
-.company-info>* {
-    position: relative;
-    z-index: 1;
-}
-
-.text-note {
-    position: absolute;
-    margin-left: 100px;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    width: 340px;
-    height: 55px;
-    background-color: white;
-    font-size: 1.25rem;
-    padding-inline-start: 20px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    z-index: 0;
-}
-
-#note2 {
-    z-index: 0;
+@supports (-webkit-touch-callout: none) {
+    .company-info {
+        background-attachment: scroll;
+    }
 }
 
 .company-info-text {
@@ -349,9 +454,10 @@ nav {
     height: 100%;
     justify-content: center;
     align-items: flex-start;
-    font-size: 48px;
-    color: white;
-    margin-left: 50px;
+    font-size: clamp(22px, 2vw, 48px);
+    color: #fff;
+    margin-left: clamp(20px, 4vw, 50px);
+    gap: clamp(5px, 2vw, 10px);
 }
 
 .company-info-text p {
@@ -360,124 +466,130 @@ nav {
 
 .btn-more {
     position: absolute;
-    bottom: 50px;
-    margin-left: 50px;
+    bottom: clamp(20px, 4vw, 50px);
+    margin-left: clamp(20px, 4vw, 50px);
 }
 
+
+/* =================== COMPANY REASON SECTION =================== */
 .company-reason {
     width: 100%;
-    height: 100vh;
-    background: url("../assets/images/reason-back.avif") center center / cover no-repeat;
+    min-height: min(100vh, 900px);
+    background: url("../assets/images/reason-back.avif") center/cover no-repeat;
 }
 
-/* Section container */
 .company-reason-text {
     width: 100%;
-    height: 100%;
-    padding: 5rem 2rem;
-    background-image: url("assets/images/green-bg.avif");
-    background-size: cover;
-    background-position: center;
-    position: relative;
+    min-height: inherit;
+    padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 32px);
     display: flex;
-    justify-content: left;
     align-items: center;
+    justify-content: flex-start;
 }
 
-/* Grid layout */
 .why-grid {
-    width: fit-content;
-    position: relative;
-    z-index: 2;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-    margin-top: 50px;
-    margin-left: 70px;
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+    /* ★ 常に 2列 */
+    gap: clamp(20px, 3vw, 40px);
+    width: fit-content;
+    margin-left: clamp(20px, 4vw, 70px);
+    margin-top: clamp(40px, 6vw, 70px);
 }
 
-/* Each item */
 .why-item {
     color: white;
     font-family: 'Noto Sans JP', sans-serif;
+    font-size: clamp(14px, 1.4vw, 20px);
 }
 
-/* Title */
 .why-item h3 {
-    font-size: 2rem;
+    font-size: clamp(18px, 2vw, 24px);
     font-weight: 700;
-    line-height: 1.5;
+    margin-bottom: clamp(12px, 1.5vw, 20px);
 }
 
-/* Description */
 .why-item p {
-    font-size: 1.5rem;
+    font-size: clamp(14px, 1.6vw, 20px);
     line-height: 1.7;
 }
 
 .why-item>* {
-    margin-bottom: 50px;
+    margin-bottom: clamp(16px, 2.5vw, 28px);
 }
 
 .rect {
-    width: 55px;
-    height: 55px;
+    width: clamp(42px, 3.5vw, 55px);
+    height: clamp(42px, 3.5vw, 55px);
     border-radius: 10px;
-    margin-bottom: 30px;
-    border: white 1px solid;
+    margin-bottom: clamp(20px, 2.8vw, 30px);
+    border: 1px solid #fff;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .rect svg path {
-    fill: white !important;
+    fill: #fff !important;
 }
 
+@media (max-width:600px) {
+    .company-reason-text {
+        justify-content: center;
+        align-items: center;
+    }
 
-/* =========================== NEWS ============================ */
+    .why-grid {
+        grid-template-columns: repeat(1, minmax(260px, 1fr));
+    }
 
+    .business-item {
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+.viewbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* =================== NEWS =================== */
 .news {
     width: 100%;
-    padding: 20px 40px;
+    height: fit-content;
+    padding: clamp(20px, 4vw, 40px) clamp(16px, 2vw, 40px);
+    background: #f4f4f4;
+    color: #111;
 }
 
 .news-heading {
-    font-size: 60px;
-    font-weight: bold;
-    margin-bottom: 40px;
-    color: #333;
+    font-size: clamp(30px, 4vw, 60px);
+    font-weight: 700;
+    margin-bottom: clamp(10px, 3vw, 40px);
 }
 
 .news-container {
     position: relative;
     width: 100%;
-    padding: 0px 50px;
+    padding-inline: clamp(10px, 2vw, 50px);
     display: flex;
-    max-height: 550px;
 }
 
+/* left */
 .news-left {
-    width: 300px;
-    height: 100%;
-}
-
-.news-sns {
-    background-color: #242834;
-    height: 300px;
-    padding-bottom: 30px;
-    gap: 30px;
-    font-weight: bold;
-    border-bottom-left-radius: 25px;
+    width: clamp(180px, 20vw, 300px);
 }
 
 .news-video {
     width: 100%;
-    height: 250px;
+    height: 40%;
     border: 6px solid #0094ff;
     border-top-left-radius: 20px;
     overflow: hidden;
     position: relative;
+    background: #242834;
 }
 
 .news-video img {
@@ -486,27 +598,22 @@ nav {
     object-fit: cover;
 }
 
-/* PLAY BUTTON */
 .play-btn {
     border: none;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
-    width: 60px;
-    height: 40px;
+    width: clamp(40px, 4vw, 60px);
+    height: clamp(28px, 3vw, 40px);
     background: rgba(255, 0, 0, 0.9);
     border-radius: 12px;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 700;
+    color: #fff;
     cursor: pointer;
     transition: all 0.25s ease;
 }
@@ -517,207 +624,288 @@ nav {
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
 }
 
-.news-video img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.news-sns {
+    background-color: #242834;
+    height: 60%;
+    padding-bottom: clamp(16px, 2vw, 30px);
+    gap: clamp(16px, 2vw, 30px);
+    font-weight: 700;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .sns-text {
-    font-size: 50px;
-    color: white;
+    font-size: clamp(28px, 4vw, 50px);
+    color: #fff;
 }
 
 .sns-btn {
-    gap: 20px;
+    display: flex;
+    gap: clamp(0px, 2vw, 20px);
+    padding-inline: 5px;
 }
 
 .sns-btn a {
     text-decoration: none;
-    padding: 8px 16px;
+    padding: clamp(0px, 0.5vw, 8px) clamp(0px, 1vw, 16px);
     background-color: transparent;
-    border: 2px white solid;
+    border: 2px solid #fff;
     border-radius: 25px;
-    font-size: 14px;
-    color: white;
+    font-size: clamp(12px, 1vw, 14px);
+    color: #fff;
 }
 
-/* ========================== NEWS RIGHT ========================== */
-
+/* right */
 .news-right {
     background-color: #ececec;
     flex: 1;
     display: flex;
     justify-content: space-evenly;
-    padding: 50px 20px;
-    gap: 40px;
-    border-right: 30px solid #242834;
+    padding: clamp(24px, 3vw, 50px) clamp(12px, 2vw, 20px);
+    gap: clamp(0px, 2vw, 40px);
+    border-right: clamp(16px, 3vw, 30px) solid #242834;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
 
 .news-item {
     width: 33%;
-    height: 100%;
-    min-width: 250px;
-    max-width: 300px;
+    min-width: clamp(150px, 20vw, 200px);
+    max-width: 320px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
 }
 
 .news-item img {
     width: 100%;
-    max-width: 100%;
     height: auto;
     border-radius: 12px;
     margin-bottom: 12px;
+    object-fit: cover;
 }
 
 .news-item h4 {
-    font-size: clamp(18px, 5vw, 24px);
-    /* Minimum 18px, 5% of viewport width, maximum 24px */
+    font-size: clamp(16px, 2vw, 24px);
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #222;
 }
 
 .news-item p {
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 14px);
     color: #555;
     line-height: 1.6;
+    text-align: left;
 }
 
-/* VIEW MORE */
-
+/* view more */
 .news-more {
     position: absolute;
     text-align: right;
-    bottom: 50px;
-    right: 100px;
+    bottom: clamp(16px, 3vw, 40px);
+    right: clamp(20px, 5vw, 100px);
 }
 
 .news-more a {
-    font-size: 1rem;
+    font-size: clamp(13px, 1.2vw, 16px);
     text-decoration: none;
-    color: black;
-    border-bottom: 2px solid black;
+    color: #000;
+    border-bottom: 2px solid #000;
     padding-bottom: 2px;
 }
 
-/* =============== BUSINESS SECTION =============== */
+@media (max-width: 768px) {
 
+    .news-container {
+        flex-direction: column;
+        /* 縦並び */
+        padding: 0;
+        gap: 0px;
+    }
+
+    .news-video {
+        border-top-right-radius: 20px;
+        border: 4px solid #0094ff;
+        border-bottom: none;
+    }
+
+    .news-sns {
+        border-bottom-left-radius: 0px;
+    }
+
+    .news-left,
+    .news-right {
+        width: 100%;
+    }
+
+    /* SNS 部分の高さ調整 */
+    .news-sns {
+        height: auto;
+        padding: 30px;
+    }
+
+    /* NEWS カードを 2列 → 自動で 1列に落ちるグリッドへ変更 */
+    .news-right {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 30px;
+        padding: 20px;
+        border-right: none;
+        /* 不要な縦線を消す */
+        border-radius: 0;
+    }
+
+    /* VIEW MORE ボタン位置調整 */
+    .news-more {
+        position: static;
+        text-align: right;
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .news-item {
+        width: 100%;
+        max-width: fit-content;
+    }
+
+}
+
+/* =================== BUSINESS =================== */
 .business {
     width: 100%;
-    padding: 60px 40px;
+    padding: clamp(0px, 5vw, 60px) clamp(20px, 4vw, 40px);
     font-family: 'Noto Sans JP', sans-serif;
+    background: #f5f5f5;
+    color: #111;
 }
 
 .business-title {
-    font-size: 60px;
-    font-weight: bold;
-    margin-bottom: 40px;
-    color: #333;
+    font-size: clamp(30px, 4vw, 60px);
+    font-weight: 700;
+    margin-bottom: clamp(10px, 3vw, 40px);
 }
 
 .business-list {
-    padding: 0px 100px;
+    padding-inline: clamp(0px, 4vw, 64px);
     display: flex;
     flex-direction: column;
-    gap: 150px;
+    gap: clamp(40px, 10vw, 120px);
 }
 
-/* Each block */
 .business-item {
     display: flex;
-    align-items: center;
-    background: white;
-    border-radius: 20px;
+    align-items: stretch;
     position: relative;
-    min-height: 300px;
-    background-color: #ececec;
-    max-height: 360px;
+    min-height: clamp(220px, 30vw, 380px);
+    border-radius: 20px;
+    background: #ececec;
 }
 
-
-/* Text */
 .biz-text {
+    width: 50%;
+    padding: clamp(20px, 4vw, 100px) clamp(20px, 4vw, 100px);
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    flex-direction: column;
-    padding-right: 50%;
-    padding: 80px;
-    width: 60%;
-    min-height: 370px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    gap: clamp(10px, 2vw, 40px);
 }
 
 .biz-text h3 {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 30px;
+    font-size: clamp(16px, 3vw, 32px);
+    font-weight: 700;
 }
 
 .biz-text p {
-    font-size: 24px;
+    font-size: clamp(14px, 2vw, 20px);
     line-height: 1.7;
     color: #444;
 }
 
-/* Image + diagonal line */
 .biz-image {
-    width: 40%;
     position: absolute;
-    right: 50px;
-    background-size: cover;
+    right: clamp(10px, 3vw, 50px);
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .biz-image img {
-    width: 100%;
-    height: 100%;
+    height: clamp(180px, 30vw, 420px);
     border-radius: 20px;
-    min-height: 400px;
+    object-fit: cover;
 }
 
+@media (max-width: 600px) {
+    .business-item {
+        flex-direction: column;
+    }
+
+    .biz-text {
+        width: 100%;
+    }
+
+    .biz-image {
+        position: relative;
+        transform: translateY(0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 0px;
+        padding: 0;
+    }
+
+    .biz-image img {
+        width: 100%;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+}
+
+/* =================== BLOG / SCROLL =================== */
 .blog {
-    padding-block: 100px;
+    padding-block: clamp(40px, 6vw, 100px);
+    background: #fff;
+    color: #111;
 }
 
 .blog-heading {
-    padding-left: 40px;
-    font-size: 60px;
-    font-weight: bold;
-    margin-bottom: 40px;
-    color: #333;
+    padding-left: clamp(20px, 4vw, 40px);
+    font-size: clamp(30px, 4vw, 60px);
+    font-weight: 700;
+    margin-bottom: clamp(24px, 3vw, 40px);
 }
 
 .blog-text {
-    font-size: 24px;
+    font-size: clamp(16px, 2vw, 24px);
     display: flex;
     justify-content: center;
+    margin-bottom: clamp(16px, 2vw, 24px);
 }
 
 .infinite-scroll {
     width: 100%;
     overflow: hidden;
-    padding: 20px 0;
+    padding-block: clamp(16px, 2vw, 24px);
 }
 
 .scroll-track {
     display: flex;
-    gap: 50px;
-    /* spacing between images */
+    gap: clamp(20px, 3vw, 50px);
     animation: scrollLeft 20s linear infinite;
 }
 
 .scroll-track img {
-    height: 300px;
+    height: clamp(140px, 20vw, 300px);
     width: auto;
     border-radius: 10px;
-    margin-bottom: 30px;
+    margin-bottom: clamp(12px, 2vw, 20px);
+    object-fit: cover;
 }
 
 @keyframes scrollLeft {
@@ -730,48 +918,38 @@ nav {
     }
 }
 
-footer {
-    width: 100%;
-    height: 50vh;
-    z-index: 10;
-}
-
+/* =================== SERVICE BANNER (FOOTER HERO) =================== */
 .service {
     position: relative;
     width: 100%;
-    height: 50vh;
+    height: min(50vh, 420px);
     background-image: url('../assets/images/biz6.jpg');
     background-size: cover;
     background-position: center;
     overflow: hidden;
 }
 
-/* Dark overlay BEHIND the ticket */
 .service::after {
     content: "";
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 0;
-    /* overlay layer */
 }
 
 .service-banner {
-    width: 41%;
-    height: 250px;
-    background-color: white;
+    width: min(800px, 90%);
+    height: clamp(190px, 26vw, 250px);
+    background-color: #fff;
     border-radius: 5px;
-    padding: 0px 20px;
+    padding: 0 clamp(16px, 2vw, 20px);
     position: absolute;
-    right: 50px;
-    bottom: 50px;
+    right: clamp(16px, 5vw, 50px);
+    bottom: clamp(16px, 4vw, 50px);
     z-index: 2;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: clamp(10px, 2vw, 20px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -779,95 +957,87 @@ footer {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: clamp(10px, 2vw, 20px);
 }
 
-/* LEFT IMAGE */
 .sb-left img {
-    width: 300px;
+    width: clamp(120px, 18vw, 300px);
     height: auto;
     border-radius: 6px;
     object-fit: cover;
 }
 
-/* CENTER TEXT */
 .sb-center {
     flex: 1;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: clamp(14px, 1.6vw, 20px);
     font-weight: 700;
     color: #222;
-    font-family: "Noto Sans JP", sans-serif;
 }
 
-/* BUTTON */
 .sb-right .sb-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: clamp(8px, 1.4vw, 16px);
     background: #111;
-    color: white;
-    padding: 12px 20px;
+    color: #fff;
+    padding: clamp(10px, 1vw, 12px) clamp(16px, 1.6vw, 20px);
     border-radius: 6px;
-
-    font-size: 1rem;
+    font-size: clamp(12px, 1.1vw, 16px);
     text-decoration: none;
-    font-family: "Noto Sans JP", sans-serif;
-
     transition: 0.25s ease;
 }
 
-/* BUTTON HOVER */
 .sb-right .sb-btn:hover {
     background: #333;
     transform: translateY(-2px);
 }
 
-/* ROUND ICON */
 .sb-icon {
-    width: 32px;
-    height: 32px;
-    border: 2px solid white;
+    width: clamp(26px, 2.4vw, 32px);
+    height: clamp(26px, 2.4vw, 32px);
+    border: 2px solid #fff;
     border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: 1.1rem;
+    font-size: clamp(12px, 1.2vw, 16px);
     font-weight: 700;
+}
+
+/* =================== FOOTER =================== */
+footer {
+    width: 100%;
+    background: #242834;
+    color: #e5e5e5;
 }
 
 .footer-container {
     width: 100%;
-    height: 100%;
-    padding: 60px 80px;
-    background: #242834;
-    color: #e5e5e5;
-    font-family: 'Noto Sans JP', sans-serif;
+    padding: clamp(32px, 5vw, 80px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* Grid Layout */
+/* grid */
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 60px;
-    margin-bottom: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 20vw, 260px), 1fr));
+    gap: clamp(20px, 4vw, 60px);
+    margin-bottom: clamp(24px, 3vw, 50px);
 }
 
 .footer-col h3 {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
+    font-size: clamp(14px, 1.3vw, 18px);
+    margin-bottom: clamp(10px, 1.4vw, 20px);
     font-weight: 700;
 }
 
 .footer-col p {
-    font-size: 0.95rem;
-    margin-bottom: 15px;
+    font-size: clamp(12px, 1vw, 15px);
+    margin-bottom: clamp(8px, 1.3vw, 15px);
     line-height: 1.6;
 }
 
@@ -878,13 +1048,14 @@ footer {
 /* お問い合わせボタン */
 .footer-btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 12px 28px;
+    margin-top: clamp(10px, 1.6vw, 20px);
+    padding: clamp(8px, 1vw, 12px) clamp(18px, 1.8vw, 28px);
     background: #6D4BFF;
     color: #fff;
     border-radius: 25px;
     text-decoration: none;
     font-weight: 600;
+    font-size: clamp(12px, 1.1vw, 16px);
     transition: all 0.3s ease;
 }
 
@@ -893,62 +1064,64 @@ footer {
     transform: translateY(-2px);
 }
 
-/* メール入力フォーム */
+/* メールフォーム */
 .footer-form {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    gap: clamp(8px, 1vw, 10px);
+    margin-top: clamp(10px, 1.6vw, 20px);
 }
 
 .footer-form input {
     flex: 1;
-    padding: 12px 18px;
+    padding: clamp(8px, 1vw, 12px) clamp(12px, 1.4vw, 18px);
     border-radius: 25px;
     border: 2px solid #555;
     background: #242834;
-    color: white;
+    color: #fff;
     outline: none;
+    font-size: clamp(12px, 1vw, 14px);
 }
 
 .footer-form button {
-    padding: 12px 24px;
+    padding: clamp(8px, 1vw, 12px) clamp(16px, 1.6vw, 24px);
     border-radius: 25px;
-    background: white;
+    background: #fff;
     color: #242834;
     font-weight: 700;
     border: none;
     cursor: pointer;
+    font-size: clamp(12px, 1vw, 14px);
 }
 
-/* メニュー・SNS */
+/* メニュー & SNS */
 .footer-col ul {
     list-style: none;
-    padding: 0;
 }
 
 .footer-col ul li {
-    margin-bottom: 12px;
+    margin-bottom: clamp(6px, 1vw, 12px);
 }
 
 .footer-col ul li a {
     color: #e5e5e5;
     text-decoration: none;
     transition: opacity 0.2s;
+    font-size: clamp(12px, 1vw, 14px);
 }
 
 .footer-col ul li a:hover {
     opacity: 0.7;
 }
 
-/* COPYRIGHT */
+/* コピーライト */
 .footer-bottom {
     border-top: 1px solid #3a3e48;
-    padding-top: 20px;
+    padding-top: clamp(10px, 1.4vw, 20px);
     text-align: center;
-    font-size: 0.85rem;
+    font-size: clamp(10px, 0.9vw, 14px);
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: clamp(10px, 1.6vw, 20px);
 }
 
 .footer-bottom a {
@@ -957,231 +1130,3 @@ footer {
 }
 
 /* ==================== Responsive ==================== */
-
-
-/* =============== 1025px–1280px =============== */
-@media (max-width: 1280px) {
-    header {
-        padding-inline: 16px;
-    }
-
-    .logo {
-        padding-inline: 20px;
-        font-size: 16px;
-    }
-
-    .nav {
-        padding-inline: 20px;
-    }
-
-    .nav-item {
-        font-size: 14px;
-    }
-
-    .hero {
-        padding-top: 120px;
-    }
-
-    .hero-animated-text {
-        font-size: 58px;
-    }
-
-    .hero-subtext {
-        font-size: 24px;
-        bottom: 240px;
-    }
-
-    .hero-buttons {
-        bottom: 160px;
-    }
-
-    .features-view {
-        padding-inline: 60px;
-    }
-
-    .features {
-        padding: 16px 24px;
-    }
-
-    .feature p {
-        font-size: 16px;
-    }
-
-    .feature {
-        padding-inline: 10px;
-    }
-
-    .company-info-text span {
-        font-size: 40px;
-    }
-
-    .btn-more {
-        bottom: 24px;
-    }
-
-    .text-note {
-        margin-left: 54px;
-    }
-
-    .company-reason-text {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 64px 24px;
-    }
-
-    .why-item h3,
-    .why-item p {
-        font-size: 18px;
-    }
-
-    .why-item h3 {
-        margin-bottom: 30px;
-    }
-
-
-}
-
-/* =============== 0px–1024px =============== */
-@media (max-width: 1024px) {
-    header {
-        padding-inline: 12px;
-    }
-
-    .logo {
-        padding-inline: 16px;
-        font-size: 14px;
-    }
-
-    .nav {
-        padding-inline: 16px;
-    }
-
-    .nav-item {
-        font-size: 12px;
-    }
-
-    .hero {
-        padding-top: 90px;
-    }
-
-    .hero-animated-text {
-        font-size: 52px;
-    }
-
-    .hero-subtext {
-        font-size: 24px;
-        bottom: 240px;
-    }
-
-    .hero-buttons {
-        bottom: 160px;
-    }
-
-    .features-view {
-        padding-inline: 50px;
-    }
-
-    .features {
-        padding: 12px 20px;
-    }
-
-    .feature p {
-        font-size: 14px;
-    }
-
-    .feature {
-        padding-inline: 0px;
-    }
-
-    .chat-button {
-        bottom: 20px;
-        right: 20px;
-    }
-
-    .company-info-text span {
-        font-size: 36px;
-    }
-
-    .btn-more {
-        bottom: 20px;
-    }
-
-    .text-note {
-        margin-left: 50px;
-    }
-
-    .company-reason-text {
-        padding: 60px 20px;
-    }
-
-    .why-item h3,
-    .why-item p {
-        font-size: 16px;
-    }
-
-    .why-item h3 {
-        margin-bottom: 25px;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .news-container {
-        flex-direction: column;
-    }
-
-    .news-left {
-        width: 100%;
-    }
-
-    .news-video {
-        border-top-right-radius: 25px;
-    }
-
-    .news-sns {
-        border-bottom-left-radius: 0%;
-    }
-
-    .news-right {
-        flex-direction: column;
-        border-right: none;
-        border-radius: 0;
-        border-bottom: 30px solid #242834;
-        border-bottom-right-radius: 15px;
-        border-bottom-left-radius: 15px;
-    }
-
-    .news-more {
-        bottom: 80px;
-        right: 80px;
-    }
-
-    .news-item {
-        width: 100%;
-        align-items: flex-start;
-    }
-}
-
-@media (max-width: 600px) {
-    .business {
-        padding: 40px 20px;
-    }
-
-    .business-title {
-        font-size: 32px;
-    }
-
-    .biz-text h3 {
-        font-size: 18px;
-    }
-
-    .biz-text p {
-        font-size: 14px;
-    }
-
-    .biz-image {
-        width: 100%;
-        height: 180px;
-    }
-}

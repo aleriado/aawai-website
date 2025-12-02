@@ -18,3 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+/*===================== Mobile Mode Header ================== */
+
+const burger = document.querySelector(".hamburger");
+const mobileMenu = document.querySelector(".mobile-menu");
+
+burger.addEventListener("click", () => {
+    burger.classList.toggle("active");
+    mobileMenu.classList.toggle("open");
+});
