@@ -105,7 +105,11 @@ header.hidden {
     color: #fff;
     display: flex;
     flex-direction: column;
-    font-size: clamp(12px, 1vw, 16px);
+    font-size: clamp(12px, 2vw, 16px);
+}
+
+.logo-text span {
+    text-shadow: 0px 2px 3px #000000;
 }
 
 /* nav */
@@ -253,7 +257,7 @@ nav {
     color: white;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     nav {
         display: none;
     }
@@ -457,11 +461,11 @@ nav {
     font-size: clamp(22px, 2vw, 48px);
     color: #fff;
     margin-left: clamp(20px, 4vw, 50px);
-    gap: clamp(5px, 2vw, 10px);
+    gap: clamp(5px, 2vw, 15px);
 }
 
 .company-info-text p {
-    line-height: 1.5;
+    line-height: 1.75;
 }
 
 .btn-more {
@@ -596,6 +600,7 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    max-height: 250px;
 }
 
 .play-btn {
@@ -725,12 +730,13 @@ nav {
         /* 縦並び */
         padding: 0;
         gap: 0px;
+        box-shadow: rgba(36, 40, 52, 0.4) 0px 2px 10px;
+        border-radius: 10px;
     }
 
     .news-video {
-        border-top-right-radius: 20px;
-        border: 4px solid #0094ff;
-        border-bottom: none;
+        border-top-left-radius: 0px;
+        border: none;
     }
 
     .news-sns {
@@ -756,14 +762,14 @@ nav {
         padding: 20px;
         border-right: none;
         /* 不要な縦線を消す */
-        border-radius: 0;
+        border-bottom-left-radius: 10px;
     }
 
     /* VIEW MORE ボタン位置調整 */
     .news-more {
         position: static;
         text-align: right;
-        margin-top: 10px;
+        /* margin-top: 10px; */
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
@@ -818,12 +824,12 @@ nav {
 }
 
 .biz-text h3 {
-    font-size: clamp(16px, 3vw, 32px);
+    font-size: clamp(16px, 2.5vw, 32px);
     font-weight: 700;
 }
 
 .biz-text p {
-    font-size: clamp(14px, 2vw, 20px);
+    font-size: clamp(14px, 1.5vw, 20px);
     line-height: 1.7;
     color: #444;
 }
@@ -833,17 +839,25 @@ nav {
     right: clamp(10px, 3vw, 50px);
     top: 50%;
     transform: translateY(-50%);
+    max-width: 50%;
 }
 
 .biz-image img {
-    height: clamp(180px, 30vw, 420px);
+    height: clamp(200px, 30vw, 420px);
     border-radius: 20px;
     object-fit: cover;
+    width: 100%;
 }
 
 @media (max-width: 600px) {
     .business-item {
         flex-direction: column;
+        box-shadow: rgba(36, 40, 52, 0.4) 0px 2px 10px;
+        border-radius: 10px;
+    }
+
+    .business-list {
+        padding: 0px;
     }
 
     .biz-text {
@@ -858,10 +872,13 @@ nav {
         align-items: center;
         right: 0px;
         padding: 0;
+        max-width: 100%;
     }
 
     .biz-image img {
+        border-radius: 10px;
         width: 100%;
+        height: 100%;
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
     }
@@ -923,7 +940,7 @@ nav {
     position: relative;
     width: 100%;
     height: min(50vh, 420px);
-    background-image: url('../assets/images/biz6.jpg');
+    background-image: url('../assets/images/biz9.jpg');
     background-size: cover;
     background-position: center;
     overflow: hidden;
@@ -938,14 +955,13 @@ nav {
 }
 
 .service-banner {
-    width: min(800px, 90%);
-    height: clamp(190px, 26vw, 250px);
+    height: clamp(150px, 26vw, 200px);
     background-color: #fff;
     border-radius: 5px;
     padding: 0 clamp(16px, 2vw, 20px);
     position: absolute;
-    right: clamp(16px, 5vw, 50px);
-    bottom: clamp(16px, 4vw, 50px);
+    right: clamp(16px, 5vw, 30px);
+    bottom: clamp(16px, 5vw, 30px);
     z-index: 2;
     display: flex;
     align-items: center;
@@ -961,7 +977,7 @@ nav {
 }
 
 .sb-left img {
-    width: clamp(120px, 18vw, 300px);
+    width: clamp(150px, 18vw, 250px);
     height: auto;
     border-radius: 6px;
     object-fit: cover;
@@ -975,8 +991,15 @@ nav {
     color: #222;
 }
 
+.sb-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .sb-right .sb-btn {
     display: flex;
+    width: fit-content;
     align-items: center;
     justify-content: space-between;
     gap: clamp(8px, 1.4vw, 16px);
@@ -995,8 +1018,8 @@ nav {
 }
 
 .sb-icon {
-    width: clamp(26px, 2.4vw, 32px);
-    height: clamp(26px, 2.4vw, 32px);
+    min-width: 32px;
+    min-height: 32px;
     border: 2px solid #fff;
     border-radius: 50%;
     display: flex;
@@ -1004,6 +1027,21 @@ nav {
     justify-content: center;
     font-size: clamp(12px, 1.2vw, 16px);
     font-weight: 700;
+}
+
+@media (max-width: 500px) {
+    .sb-right .sb-btn :first-child {
+        display: none;
+    }
+
+    .sb-right .sb-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .service-banner {
+        margin-left: 10px;
+    }
 }
 
 /* =================== FOOTER =================== */

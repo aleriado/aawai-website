@@ -2,78 +2,101 @@ main {
     background-color: black;
 }
 
+/* ---------- TOP SECTION ---------- */
 .services-top {
     width: 100%;
-    height: 100vh;
-    padding: 60px 100px;
+    min-height: 100vh;
+
+    padding: clamp(80px, 6vw, 100px) clamp(30px, 6vw, 100px);
+
     color: white;
     font-family: 'Noto Sans JP', sans-serif;
+
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    gap: clamp(20px, 4vw, 40px);
 }
 
 .services-title {
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 4vw, 3rem);
     font-weight: 700;
-    margin-bottom: 40px;
 }
 
+/* ---------- GRID SECTION ---------- */
+/* PC: always 2×2 */
 .services-grid {
-    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 0px;
-    /* 画像と同じく線で区切るため gap=0 */
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
     border: 1px solid #34363f;
 }
 
 .service-box {
-    padding: 40px;
+    padding: clamp(20px, 4vw, 50px);
+    background-color: #2b2d36;
+
     border-bottom: 1px solid #3a3d47;
     border-right: 1px solid #3a3d47;
-    background-color: #2b2d36;
+
     position: relative;
 }
 
-.service-box:nth-child(2),
-.service-box:nth-child(4) {
-    border-right: none;
+/* Tablet & Mobile: 1 column */
+@media (max-width: 1080px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-.service-box:nth-child(3),
-.service-box:nth-child(4) {
-    border-bottom: none;
+/* Remove right border when last column */
+@media (min-width: 769px) {
+    .services-grid> :nth-child(2n) {
+        border-right: none;
+    }
 }
 
+/* Remove bottom border on last row */
+@media (min-width: 769px) {
+    .services-grid> :nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+}
+
+/* line highlight */
 .service-line {
-    width: 6px;
-    height: 40px;
+    width: clamp(4px, 0.6vw, 6px);
+    height: clamp(30px, 4vw, 40px);
     background: #6D4BFF;
     border-radius: 4px;
+
     position: absolute;
-    left: 70px;
-    top: 40px;
+    left: clamp(20px, 4vw, 70px);
+    top: clamp(20px, 4vw, 40px);
 }
 
 .service-box h3 {
-    font-size: 1.4rem;
-    margin-left: 50px;
-    margin-bottom: 20px;
+    font-size: clamp(1rem, 2vw, 1.6rem);
+    font-weight: 600;
+    margin-left: clamp(40px, 5vw, 60px);
+    margin-bottom: clamp(10px, 2vw, 20px);
+    line-height: 1.4;
 }
 
 .service-box p {
-    max-width: 400px;
-    margin-left: 50px;
+    font-size: clamp(0.85rem, 1.8vw, 1.1rem);
     line-height: 1.9;
-    font-size: 1rem;
+    margin-left: clamp(40px, 5vw, 60px);
+    max-width: min(420px, 100%);
 }
 
+/* ---------- BOTTOM SECTION (PARALLAX) ---------- */
 .service-bottom {
     width: 100%;
-    height: 50vh;
+    height: clamp(45vh, 55vh, 60vh);
+
     position: relative;
 
     background-image: url('../assets/images/service.avif');
@@ -86,46 +109,49 @@ main {
     align-items: center;
 }
 
+/* Dark overlay */
 .service-bottom::after {
     content: "";
     position: absolute;
-    left: 0;
-    width: 100%;
-    height: 50vh;
+    inset: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 0;
-    /* overlay layer */
 }
 
-/* 中央コンテンツ */
+/* Center content */
 .service-center {
     text-align: center;
     color: white;
     z-index: 5;
+
+    padding-inline: clamp(20px, 5vw, 80px);
 }
 
 .service-center h2 {
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: 50px;
+    margin-bottom: clamp(20px, 4vw, 50px);
 }
 
 .service-center p {
-    font-size: 1rem;
-    margin-bottom: 50px;
+    font-size: clamp(0.9rem, 1.7vw, 1.1rem);
     opacity: 0.9;
+    margin-bottom: clamp(20px, 4vw, 50px);
+    line-height: 1.8;
 }
 
-/* ボタン */
+/* Button */
 .service-btn {
     display: inline-block;
-    padding: 1rem 2.5rem;
+    padding: clamp(0.7rem, 1.6vw, 1rem) clamp(1.4rem, 3vw, 2.5rem);
     background: #6D4BFF;
     color: white;
-    text-decoration: none;
     border-radius: 999px;
-    font-size: 1rem;
+    text-decoration: none;
+
+    font-size: clamp(0.9rem, 1.6vw, 1.1rem);
     font-weight: 600;
+
     transition: 0.25s ease;
 }
 
