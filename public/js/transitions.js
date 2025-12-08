@@ -129,6 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
             loaderWrapper.classList.add('loaded');
             document.body.classList.add('loaded');
             
+            // Dispatch custom event to signal loader is complete
+            const loaderCompleteEvent = new CustomEvent('loaderComplete');
+            window.dispatchEvent(loaderCompleteEvent);
+            
             // Remove loader from DOM after transition
             setTimeout(() => {
                 loaderWrapper.style.display = 'none';
@@ -168,11 +172,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!heroText) return;
 
     let animationDone = false;
+    let loaderComplete = false;
+
+    // Wait for loader to complete before starting animations
+    window.addEventListener('loaderComplete', () => {
+        loaderComplete = true;
+        // If hero text is already visible, start animation
+        if (heroText.getBoundingClientRect().top < window.innerHeight) {
+            if (!animationDone) {
+                animationDone = true;
+                runHeroAnimation(heroText);
+            }
+        }
+    });
 
     // Create intersection observer
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !animationDone) {
+            if (entry.isIntersecting && !animationDone && loaderComplete) {
                 animationDone = true;
                 observer.unobserve(heroText);
                 runHeroAnimation(heroText);
@@ -242,12 +259,18 @@ function animateCount(el) {
 // -------------------------Text Note Animation------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
+    let loaderComplete = false;
+
+    // Wait for loader to complete
+    window.addEventListener('loaderComplete', () => {
+        loaderComplete = true;
+    });
 
     const notes = document.querySelectorAll(".text-note");
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && loaderComplete) {
                 entry.target.classList.add("visible");
                 observer.unobserve(entry.target);
             }
@@ -263,6 +286,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // -------------------------Company Info----------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
+    let loaderComplete = false;
+
+    // Wait for loader to complete
+    window.addEventListener('loaderComplete', () => {
+        loaderComplete = true;
+    });
 
     const animatedSelectors = [
         ".company-info-text",
@@ -284,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.intersectionRatio >= 0.4) {
+            if (entry.intersectionRatio >= 0.4 && loaderComplete) {
 
                 // If it's a COUNT element → run animation
                 if (entry.target.classList.contains("count")) {

@@ -381,6 +381,13 @@
 
 .hero-animated-text {
     opacity: 0;
+    pointer-events: none;
+}
+
+/* Prevent hero animations from starting until loader completes */
+body:not(.loaded) .hero-animated-text {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .hero-animated-text span {
@@ -402,11 +409,20 @@
     opacity: 0;
     transform: translateX(-40px) skewX(8deg);
     filter: blur(10px);
+    pointer-events: none;
+}
+
+/* Wait for loader to complete before allowing animation */
+body:not(.loaded) .hero-subtext {
+    opacity: 0;
+    transform: translateX(-40px) skewX(8deg);
+    filter: blur(10px);
 }
 
 /* Visible animation state */
 .hero-subtext.visible {
     animation: heroSubtextReveal 0.9s cubic-bezier(.16, .84, .44, 1) forwards;
+    pointer-events: auto;
 }
 
 /* Keyframes (similar to hero title) */
@@ -425,11 +441,20 @@
     opacity: 0;
     transform: translateY(30px);
     filter: blur(10px);
+    pointer-events: none;
+}
+
+/* Wait for loader to complete before allowing animation */
+body:not(.loaded) .hero-buttons {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
 }
 
 /* When visible (scroll-trigger) */
 .hero-buttons.visible {
     animation: heroButtonsParent 0.6s cubic-bezier(.25, .46, .45, .94) forwards;
+    pointer-events: auto;
 }
 
 @keyframes heroButtonsParent {

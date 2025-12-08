@@ -330,8 +330,8 @@ document.addEventListener("DOMContentLoaded", () => {
         blogItem.style.cursor = "pointer";
     });
     
-    // Initialize after a short delay to ensure layout is ready
-    setTimeout(() => {
+    // Wait for loader to complete before initializing
+    function initializeBlogSlider() {
         // Set initial active state
         blogItems.forEach((container, index) => {
             if (index === currentIndex) {
@@ -343,7 +343,22 @@ document.addEventListener("DOMContentLoaded", () => {
         updateSlider();
         setButtonsEnabled(true); // Ensure buttons are enabled
         startAutoAdvance();
-    }, 100);
+    }
+    
+    // Listen for loader completion
+    window.addEventListener('loaderComplete', () => {
+        // Initialize after a short delay to ensure layout is ready
+        setTimeout(() => {
+            initializeBlogSlider();
+        }, 100);
+    });
+    
+    // Fallback: if loader already completed, initialize immediately
+    if (document.body.classList.contains('loaded')) {
+        setTimeout(() => {
+            initializeBlogSlider();
+        }, 100);
+    }
     
     // Update on window resize
     let resizeTimeout;
@@ -358,6 +373,13 @@ document.addEventListener("DOMContentLoaded", () => {
 /*===================== Business Item Animation ================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+    let loaderComplete = false;
+
+    // Wait for loader to complete
+    window.addEventListener('loaderComplete', () => {
+        loaderComplete = true;
+    });
+
     // Observer for business-item containers
     const businessItems = document.querySelectorAll(".business-item");
     const businessItemsArray = Array.prototype.slice.call(businessItems);
@@ -376,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function businessCallback(entries) {
         entries.forEach(function (entry, i) {
             const target = entry.target;
-            if (entry.isIntersecting && !target.classList.contains("_show")) {
+            if (entry.isIntersecting && !target.classList.contains("_show") && loaderComplete) {
                 const delay = i * 100;
                 setTimeout(function () {
                     target.classList.add("_show");
@@ -403,7 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function imageCallback(entries) {
         entries.forEach(function (entry, i) {
             const target = entry.target;
-            if (entry.isIntersecting && !target.classList.contains("_show")) {
+            if (entry.isIntersecting && !target.classList.contains("_show") && loaderComplete) {
                 const delay = i * 100;
                 setTimeout(function () {
                     target.classList.add("_show");
