@@ -172,6 +172,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const heroText = document.querySelector(".hero-animated-text");
+    const heroSubtext = document.querySelector(".hero-subtext");
+    const heroButtons = document.querySelector(".hero-buttons");
+    const counts = document.querySelectorAll(".count");
     if (!heroText) return;
 
     let animationDone = false;
@@ -201,6 +204,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.4 });
 
     observer.observe(heroText);
+
+    // Ensure subtext, buttons, and counts become visible once loader finishes
+    window.addEventListener('loaderComplete', () => {
+        loaderComplete = true;
+        if (heroSubtext) {
+            heroSubtext.classList.add("visible");
+        }
+        if (heroButtons) {
+            heroButtons.classList.add("visible");
+        }
+        counts.forEach(countEl => {
+            if (countEl.dataset.done !== "true") {
+                animateCount(countEl);
+            }
+        });
+    });
 
     // Animation function
     function runHeroAnimation(element) {

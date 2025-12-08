@@ -52,22 +52,50 @@
 /* Robot Parts - Initial floating state */
 .robot-part {
     position: absolute;
-    background: linear-gradient(135deg, #6D4BFF 0%, #8B68FF 100%);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(109, 75, 255, 0.4);
+    background: linear-gradient(135deg, #7ed8ff 0%, #a28bff 50%, #ff9bd1 100%);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    box-shadow:
+        0 10px 25px rgba(93, 120, 255, 0.35),
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 2px 8px rgba(255, 255, 255, 0.35);
     opacity: 0;
     animation: floatIn 0.6s ease-out forwards;
+    backdrop-filter: blur(4px);
 }
 
 /* Head */
 .robot-part.head {
-    width: 80px;
-    height: 80px;
+    width: 86px;
+    height: 86px;
     top: 0;
     left: 50%;
     transform: translateX(-50%) translateY(-100px) rotate(45deg);
-    border-radius: 50% 50% 50% 0;
+    border-radius: 50% 50% 46% 12%;
     animation-delay: 0s;
+    overflow: hidden;
+}
+
+.robot-part.head::before {
+    content: "";
+    position: absolute;
+    inset: 20% 12% 40% 12%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.28), rgba(0, 0, 0, 0.08));
+    border-radius: 14px;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.robot-part.head::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 10px;
+    background: linear-gradient(90deg, #ffb5d8, #7ed8ff);
+    border-radius: 999px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .robot-part.head.assembled {
@@ -77,11 +105,14 @@
 /* Eyes */
 .robot-eye {
     position: absolute;
-    width: 12px;
-    height: 12px;
-    background: #00ff88;
+    width: 14px;
+    height: 14px;
+    background: #7ef8ff;
     border-radius: 50%;
-    box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+    box-shadow:
+        0 0 8px rgba(126, 248, 255, 0.9),
+        0 0 16px rgba(126, 248, 255, 0.65);
+    border: 2px solid rgba(255, 255, 255, 0.6);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -104,11 +135,27 @@
 /* Torso */
 .robot-part.torso {
     width: 100px;
-    height: 120px;
+    height: 126px;
     top: 80px;
     left: 50%;
     transform: translateX(-50%) translateX(150px) translateY(-50px) rotate(-30deg);
     animation-delay: 0s;
+    border-radius: 26px;
+    background: linear-gradient(145deg, #7ed8ff 0%, #6b8dff 40%, #ff9bd1 100%);
+    box-shadow:
+        0 12px 28px rgba(93, 120, 255, 0.35),
+        0 6px 14px rgba(0, 0, 0, 0.2),
+        inset 0 2px 10px rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+}
+
+.robot-part.torso::before {
+    content: "";
+    position: absolute;
+    inset: 14% 18% 20% 18%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+    border-radius: 20px;
+    box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.35);
 }
 
 .robot-part.torso.assembled {
@@ -117,13 +164,17 @@
 
 /* Arms */
 .robot-part.left-arm {
-    width: 20px;
-    height: 80px;
+    width: 22px;
+    height: 88px;
     top: 100px;
     left: 50%;
     transform: translateX(-60px) translateX(-120px) translateY(-100px) rotate(60deg);
     border-radius: 10px;
     animation-delay: 0s;
+    background: linear-gradient(160deg, #7ed8ff, #6b8dff);
+    box-shadow:
+        0 6px 16px rgba(93, 120, 255, 0.35),
+        inset 0 1px 6px rgba(255, 255, 255, 0.35);
 }
 
 .robot-part.left-arm.assembled {
@@ -131,13 +182,17 @@
 }
 
 .robot-part.right-arm {
-    width: 20px;
-    height: 80px;
+    width: 22px;
+    height: 88px;
     top: 100px;
     left: 50%;
     transform: translateX(40px) translateX(120px) translateY(-100px) rotate(-60deg);
     border-radius: 10px;
     animation-delay: 0s;
+    background: linear-gradient(200deg, #7ed8ff, #6b8dff);
+    box-shadow:
+        0 6px 16px rgba(93, 120, 255, 0.35),
+        inset 0 1px 6px rgba(255, 255, 255, 0.35);
 }
 
 .robot-part.right-arm.assembled {
@@ -146,13 +201,17 @@
 
 /* Legs */
 .robot-part.left-leg {
-    width: 25px;
-    height: 100px;
+    width: 26px;
+    height: 110px;
     top: 200px;
     left: 50%;
     transform: translateX(-30px) translateX(-100px) translateY(50px) rotate(20deg);
     border-radius: 12px;
     animation-delay: 0s;
+    background: linear-gradient(180deg, #7ed8ff 0%, #6b8dff 60%, #5b6adf 100%);
+    box-shadow:
+        0 10px 20px rgba(93, 120, 255, 0.35),
+        inset 0 1px 6px rgba(255, 255, 255, 0.35);
 }
 
 .robot-part.left-leg.assembled {
@@ -160,13 +219,17 @@
 }
 
 .robot-part.right-leg {
-    width: 25px;
-    height: 100px;
+    width: 26px;
+    height: 110px;
     top: 200px;
     left: 50%;
     transform: translateX(5px) translateX(100px) translateY(50px) rotate(-20deg);
     border-radius: 12px;
     animation-delay: 0s;
+    background: linear-gradient(180deg, #7ed8ff 0%, #6b8dff 60%, #5b6adf 100%);
+    box-shadow:
+        0 10px 20px rgba(93, 120, 255, 0.35),
+        inset 0 1px 6px rgba(255, 255, 255, 0.35);
 }
 
 .robot-part.right-leg.assembled {
@@ -175,18 +238,11 @@
 
 /* Joints - Colorful dots */
 .robot-joint {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background: radial-gradient(circle, #ff6b9d, #ff1744);
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(255, 107, 157, 0.8);
-    opacity: 0;
-    animation: pulse 1.5s ease-in-out infinite;
+    display: none;
 }
 
 .robot-joint.active {
-    opacity: 1;
+    display: none;
 }
 
 .joint-1 { top: 10px; left: 50%; transform: translateX(-50%); }
@@ -408,7 +464,7 @@ body:not(.loaded) .hero-animated-text {
 /* Initial hidden state for hero-subtext */
 .hero-subtext {
     opacity: 0;
-    transform: translateX(-40px) skewX(8deg);
+    transform: translateY(22px) scale(0.98);
     filter: blur(10px);
     pointer-events: none;
 }
@@ -416,21 +472,30 @@ body:not(.loaded) .hero-animated-text {
 /* Wait for loader to complete before allowing animation */
 body:not(.loaded) .hero-subtext {
     opacity: 0;
-    transform: translateX(-40px) skewX(8deg);
+    transform: translateY(22px) scale(0.98);
     filter: blur(10px);
 }
 
 /* Visible animation state */
 .hero-subtext.visible {
-    animation: heroSubtextReveal 0.9s cubic-bezier(.16, .84, .44, 1) forwards;
+    animation: heroSubtextFloat 0.9s cubic-bezier(.19, 1, .22, 1) forwards;
     pointer-events: auto;
 }
 
-/* Keyframes (similar to hero title) */
-@keyframes heroSubtextReveal {
-    to {
+@keyframes heroSubtextFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.98);
+        filter: blur(10px);
+    }
+    60% {
         opacity: 1;
-        transform: translateX(0) skewX(0deg);
+        transform: translateY(-2px) scale(1.01);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
         filter: blur(0);
     }
 }
@@ -440,28 +505,38 @@ body:not(.loaded) .hero-subtext {
 /* Parent container initially hidden */
 .hero-buttons {
     opacity: 0;
-    transform: translateY(30px);
-    filter: blur(10px);
+    transform: translateY(26px) scale(0.97);
+    filter: blur(12px);
     pointer-events: none;
 }
 
 /* Wait for loader to complete before allowing animation */
 body:not(.loaded) .hero-buttons {
     opacity: 0;
-    transform: translateY(30px);
-    filter: blur(10px);
+    transform: translateY(26px) scale(0.97);
+    filter: blur(12px);
 }
 
 /* When visible (scroll-trigger) */
 .hero-buttons.visible {
-    animation: heroButtonsParent 0.6s cubic-bezier(.25, .46, .45, .94) forwards;
+    animation: heroButtonsLift 0.7s cubic-bezier(.19, 1, .22, 1) forwards;
     pointer-events: auto;
 }
 
-@keyframes heroButtonsParent {
-    to {
+@keyframes heroButtonsLift {
+    0% {
+        opacity: 0;
+        transform: translateY(26px) scale(0.97);
+        filter: blur(12px);
+    }
+    65% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(-4px) scale(1.01);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
         filter: blur(0);
     }
 }
@@ -469,17 +544,27 @@ body:not(.loaded) .hero-buttons {
 /* ---- Individual button animations ---- */
 .hero-buttons .btn {
     opacity: 0;
-    transform: translateY(15px) scale(0.85);
-    filter: blur(6px);
+    transform: translateY(18px) scale(0.94);
+    filter: blur(8px);
 }
 
 /* Buttons visible after parent reveal */
 .hero-buttons.visible .btn {
-    animation: heroButtonReveal 0.45s cubic-bezier(.25, .46, .45, .94) forwards;
+    animation: heroButtonRise 0.55s cubic-bezier(.19, 1, .22, 1) forwards;
 }
 
-@keyframes heroButtonReveal {
-    to {
+@keyframes heroButtonRise {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.94);
+        filter: blur(8px);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.01);
+        filter: blur(1px);
+    }
+    100% {
         opacity: 1;
         transform: translateY(0) scale(1);
         filter: blur(0);
