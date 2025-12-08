@@ -10,9 +10,50 @@
 </head>
 
 <body>
-    <!-- Preloader -->
+    <!-- Preloader - AI Robot Assembly -->
     <div id="loader-wrapper">
-        <div id="loader"></div>
+        <div class="robot-container">
+            <!-- Robot Parts -->
+            <div class="robot-part head" data-part="head">
+                <div class="robot-eye left-eye"></div>
+                <div class="robot-eye right-eye"></div>
+            </div>
+            <div class="robot-part torso" data-part="torso">
+                <div class="robot-joint joint-1"></div>
+                <div class="robot-joint joint-2"></div>
+            </div>
+            <div class="robot-part left-arm" data-part="left-arm">
+                <div class="robot-joint joint-3"></div>
+            </div>
+            <div class="robot-part right-arm" data-part="right-arm">
+                <div class="robot-joint joint-4"></div>
+            </div>
+            <div class="robot-part left-leg" data-part="left-leg">
+                <div class="robot-joint joint-5"></div>
+            </div>
+            <div class="robot-part right-leg" data-part="right-leg">
+                <div class="robot-joint joint-6"></div>
+            </div>
+            
+            <!-- Thumbs up hand (appears at end) -->
+            <div class="robot-thumb" data-part="thumb"></div>
+        </div>
+        
+        <!-- Loading Bar -->
+        <div class="loading-bar-container">
+            <div class="loading-bar-bg">
+                <div class="loading-bar-fill" id="loadingBarFill"></div>
+                <div class="loading-dots">
+                    <span class="dot dot-1"></span>
+                    <span class="dot dot-2"></span>
+                    <span class="dot dot-3"></span>
+                    <span class="dot dot-4"></span>
+                    <span class="dot dot-5"></span>
+                </div>
+            </div>
+            <div class="loading-text" id="loadingText">Initializing AI...</div>
+        </div>
+        
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
