@@ -67,7 +67,7 @@
     left: 50%;
     transform: translateX(-50%) translateY(-100px) rotate(45deg);
     border-radius: 50% 50% 50% 0;
-    animation-delay: 0.2s;
+    animation-delay: 0s;
 }
 
 .robot-part.head.assembled {
@@ -108,7 +108,7 @@
     top: 80px;
     left: 50%;
     transform: translateX(-50%) translateX(150px) translateY(-50px) rotate(-30deg);
-    animation-delay: 0.4s;
+    animation-delay: 0s;
 }
 
 .robot-part.torso.assembled {
@@ -123,7 +123,7 @@
     left: 50%;
     transform: translateX(-60px) translateX(-120px) translateY(-100px) rotate(60deg);
     border-radius: 10px;
-    animation-delay: 0.6s;
+    animation-delay: 0s;
 }
 
 .robot-part.left-arm.assembled {
@@ -137,7 +137,7 @@
     left: 50%;
     transform: translateX(40px) translateX(120px) translateY(-100px) rotate(-60deg);
     border-radius: 10px;
-    animation-delay: 0.8s;
+    animation-delay: 0s;
 }
 
 .robot-part.right-arm.assembled {
@@ -152,7 +152,7 @@
     left: 50%;
     transform: translateX(-30px) translateX(-100px) translateY(50px) rotate(20deg);
     border-radius: 12px;
-    animation-delay: 1s;
+    animation-delay: 0s;
 }
 
 .robot-part.left-leg.assembled {
@@ -166,7 +166,7 @@
     left: 50%;
     transform: translateX(5px) translateX(100px) translateY(50px) rotate(-20deg);
     border-radius: 12px;
-    animation-delay: 1.2s;
+    animation-delay: 0s;
 }
 
 .robot-part.right-leg.assembled {
@@ -315,7 +315,7 @@
     background: linear-gradient(90deg, #ff6b9d, #ff1744, #ff6b9d);
     background-size: 200% 100%;
     border-radius: 10px;
-    transition: width 0.3s ease;
+    transition: width 0.1s linear;
     animation: shimmer 2s linear infinite;
     box-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
 }
@@ -368,6 +368,7 @@
 }
 
 .loading-text {
+    transition: opacity 0.3s ease;
     text-align: center;
     color: #fff;
     font-size: 14px;

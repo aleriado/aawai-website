@@ -863,37 +863,6 @@ nav {
     border-radius: 20px;
 }
 
-.biz-image img.js-io {
-    /* Start with a small triangle at upper right corner - three distinct points */
-    -webkit-clip-path: polygon(100% 0%, 100% 10%, 90% 0%);
-    clip-path: polygon(100% 0%, 100% 10%, 90% 0%);
-    opacity: 0;
-    -webkit-transition: opacity 0.3s ease 0.2s, -webkit-clip-path 1s cubic-bezier(0.4, 0, 0.2, 1);
-    transition: opacity 0.3s ease 0.2s, clip-path 1s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: clip-path, opacity;
-}
-
-.biz-image img.js-io._show {
-    /* Expand to full rectangle */
-    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    opacity: 1;
-}
-
-/* Fallback for browsers that don't support clip-path */
-@supports not (clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)) {
-    .biz-image img.js-io {
-        opacity: 0;
-        transform: scale(0.8) translateX(20px);
-        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .biz-image img.js-io._show {
-        opacity: 1;
-        transform: scale(1) translateX(0);
-    }
-}
-
 @media (max-width: 600px) {
     .business-item {
         flex-direction: column;

@@ -20,12 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadingText = document.getElementById('loadingText');
     
     const loadingMessages = [
-        'Initializing AI...',
-        'Loading neural networks...',
-        'Assembling components...',
-        'Calibrating systems...',
-        'Almost ready...',
-        'Complete!'
+        'AIが自己組み立て中...',
+        '学習中...',
+        '思考中...',
+        'システム起動中...',
+        '分析中...',
+        'あと少しで完成...',
+        'AIが完了しました!'
     ];
     
     let currentProgress = 0;
@@ -40,80 +41,78 @@ document.addEventListener("DOMContentLoaded", () => {
         thumb: 2400
     };
     
-    // Start assembly sequence
+    // Start assembly sequence - ALL ANIMATIONS START TOGETHER
     function startAssembly() {
-        // Assemble head
-        setTimeout(() => {
-            if (robotParts.head) {
-                robotParts.head.classList.add('assembled');
-                updateProgress(15);
-                updateLoadingText(0);
-            }
-        }, partDelays.head);
         
-        // Activate eyes and blink
-        setTimeout(() => {
-            eyes.forEach(eye => eye.classList.add('active'));
-            updateProgress(25);
-        }, partDelays.head + 400);
+        // Activate ALL robot parts simultaneously
+        if (robotParts.head) {
+            robotParts.head.classList.add('assembled');
+        }
+        if (robotParts.torso) {
+            robotParts.torso.classList.add('assembled');
+        }
+        if (robotParts.leftArm) {
+            robotParts.leftArm.classList.add('assembled');
+        }
+        if (robotParts.rightArm) {
+            robotParts.rightArm.classList.add('assembled');
+        }
+        if (robotParts.leftLeg) {
+            robotParts.leftLeg.classList.add('assembled');
+        }
+        if (robotParts.rightLeg) {
+            robotParts.rightLeg.classList.add('assembled');
+        }
         
-        // Assemble torso
-        setTimeout(() => {
-            if (robotParts.torso) {
-                robotParts.torso.classList.add('assembled');
-                // Activate joints on torso
-                joints[0]?.classList.add('active');
-                joints[1]?.classList.add('active');
-                updateProgress(35);
+        // Activate ALL joints simultaneously
+        joints.forEach(joint => {
+            if (joint) joint.classList.add('active');
+        });
+        
+        // Activate eyes immediately
+        eyes.forEach(eye => eye.classList.add('active'));
+        
+        // Start progress bar animation - match actual loading duration
+        updateProgress(0);
+        updateLoadingText(0);
+        
+        const totalLoadingTime = 3000; // 3 seconds total
+        const progressUpdateInterval = 16; // ~60fps for smooth animation
+        const progressIncrement = (100 / (totalLoadingTime / progressUpdateInterval));
+        
+        let currentProgress = 0;
+        const startTime = Date.now();
+        
+        const progressInterval = setInterval(() => {
+            const elapsed = Date.now() - startTime;
+            currentProgress = Math.min((elapsed / totalLoadingTime) * 100, 100);
+            
+            updateProgress(Math.floor(currentProgress));
+            
+            // Update loading text at different progress points
+            if (currentProgress >= 15 && currentProgress < 30) {
                 updateLoadingText(1);
-            }
-        }, partDelays.torso);
-        
-        // Assemble left arm
-        setTimeout(() => {
-            if (robotParts.leftArm) {
-                robotParts.leftArm.classList.add('assembled');
-                joints[2]?.classList.add('active');
-                updateProgress(50);
+            } else if (currentProgress >= 30 && currentProgress < 50) {
                 updateLoadingText(2);
-            }
-        }, partDelays.leftArm);
-        
-        // Assemble right arm
-        setTimeout(() => {
-            if (robotParts.rightArm) {
-                robotParts.rightArm.classList.add('assembled');
-                joints[3]?.classList.add('active');
-                updateProgress(65);
-            }
-        }, partDelays.rightArm);
-        
-        // Assemble left leg
-        setTimeout(() => {
-            if (robotParts.leftLeg) {
-                robotParts.leftLeg.classList.add('assembled');
-                joints[4]?.classList.add('active');
-                updateProgress(80);
+            } else if (currentProgress >= 50 && currentProgress < 70) {
                 updateLoadingText(3);
-            }
-        }, partDelays.leftLeg);
-        
-        // Assemble right leg
-        setTimeout(() => {
-            if (robotParts.rightLeg) {
-                robotParts.rightLeg.classList.add('assembled');
-                joints[5]?.classList.add('active');
-                updateProgress(95);
+            } else if (currentProgress >= 70 && currentProgress < 90) {
                 updateLoadingText(4);
+            } else if (currentProgress >= 90 && currentProgress < 98) {
+                updateLoadingText(5);
             }
-        }, partDelays.rightLeg);
+            
+            if (currentProgress >= 100) {
+                clearInterval(progressInterval);
+                updateProgress(100);
+            }
+        }, progressUpdateInterval);
         
-        // Show thumbs up
+        // Show thumbs up at 95% progress
         setTimeout(() => {
             if (robotParts.thumb) {
                 robotParts.thumb.classList.add('show');
-                updateProgress(100);
-                updateLoadingText(5);
+                updateLoadingText(6);
                 
                 // Final blink
                 setTimeout(() => {
@@ -122,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }, 200);
             }
-        }, partDelays.thumb);
+        }, 2800);
         
         // Hide loader after completion
         setTimeout(() => {
@@ -137,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 loaderWrapper.style.display = 'none';
             }, 700);
-        }, partDelays.thumb + 800);
+        }, totalLoadingTime);
     }
     
     function updateProgress(percent) {
@@ -148,7 +147,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function updateLoadingText(index) {
         if (loadingText && loadingMessages[index]) {
-            loadingText.textContent = loadingMessages[index];
+            loadingText.style.opacity = '0';
+            setTimeout(() => {
+                loadingText.textContent = loadingMessages[index];
+                loadingText.style.opacity = '1';
+            }, 150);
         }
     }
     
