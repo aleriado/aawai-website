@@ -899,12 +899,16 @@ nav {
 }
 
 .blog-text {
-    font-size: clamp(16px, 2vw, 24px);
+    font-size: clamp(12px, 1.5vw, 18px);
     display: flex;
     justify-content: center;
     margin-bottom: clamp(12px, 2vw, 20px);
     text-align: center;
     padding: 0 10px;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .blog-slider-wrapper {
@@ -912,7 +916,6 @@ nav {
     display: flex;
     align-items: center;
     gap: 0;
-    padding: clamp(20px, 3vw, 40px) 0;
     overflow: hidden;
 }
 
@@ -928,36 +931,54 @@ nav {
     gap: clamp(20px, 3vw, 40px);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
+    align-items: flex-start;
 }
 
 .blog-container {
     flex: 0 0 auto;
-    width: clamp(200px, 25vw, 350px);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+    width: 370px;
+    max-width: 100%;
+    transition: opacity 0.5s ease;
     opacity: 0.7;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: visible;
+    padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .blog-container {
+        width: min(370px, 90vw);
+    }
 }
 
 .blog-container.active {
-    transform: scale(1.1);
     opacity: 1;
     z-index: 2;
 }
 
+.blog-container:not(.active) {
+    filter: brightness(0.85);
+}
+
 .blog-container img {
     width: 100%;
-    height: clamp(200px, 25vw, 400px);
+    height: auto;
     border-radius: 10px;
     margin-bottom: clamp(12px, 2vw, 20px);
-    object-fit: cover;
-    transition: transform 0.5s ease;
+    object-fit: contain;
+    transition: transform 0.5s ease, filter 0.3s ease;
+    display: block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: none;
 }
 
 .blog-container.active img {
-    transform: scale(1.05);
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
+
 
 .blog-slider-btn {
     width: 50px;
