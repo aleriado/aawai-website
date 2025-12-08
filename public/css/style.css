@@ -811,6 +811,14 @@ nav {
     min-height: clamp(220px, 30vw, 380px);
     border-radius: 20px;
     background: #ececec;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.business-item._show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .biz-text {
@@ -847,6 +855,16 @@ nav {
     border-radius: 20px;
     object-fit: cover;
     width: 100%;
+}
+
+/* Image unfolding animation - triangle from upper right corner */
+.biz-image img.js-io {
+    clip-path: polygon(100% 0%, 100% 0%, 100% 0%);
+    transition: clip-path 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.biz-image img.js-io._show {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 @media (max-width: 600px) {
