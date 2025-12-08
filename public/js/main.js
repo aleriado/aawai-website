@@ -32,7 +32,7 @@ burger.addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const sliderTrack = document.getElementById("blogSliderTrack");
-    const originalContainers = document.querySelectorAll(".blog-container");
+    const originalContainers = Array.from(document.querySelectorAll(".blog-container"));
     const leftBtn = document.querySelector(".blog-slider-btn-left");
     const rightBtn = document.querySelector(".blog-slider-btn-right");
     
@@ -40,41 +40,20 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const totalItems = originalContainers.length;
     
-    // Clone items for infinite loop
-    // Clone last 2 items at the beginning and first 2 items at the end
-    const cloneCount = 2;
+    // Convert NodeList to Array for easier manipulation
+    let blogItems = [...originalContainers];
     
-    // Clone last items at the beginning
-    for (let i = totalItems - cloneCount; i < totalItems; i++) {
-        const clone = originalContainers[i].cloneNode(true);
-        clone.classList.add("blog-clone");
-        sliderTrack.insertBefore(clone, originalContainers[0]);
-    }
-    
-    // Clone first items at the end
-    for (let i = 0; i < cloneCount; i++) {
-        const clone = originalContainers[i].cloneNode(true);
-        clone.classList.add("blog-clone");
-        sliderTrack.appendChild(clone);
-    }
-    
-    // Get all containers including clones
-    const allContainers = sliderTrack.querySelectorAll(".blog-container");
-    const totalAllItems = allContainers.length;
-    
-    // Start at the middle of original items (index 2 of 5 = index 2)
-    // After adding clones at the beginning, this becomes index 2 + cloneCount
-    const middleIndex = Math.floor(totalItems / 2); // Index 2 for 5 items
-    let currentIndex = cloneCount + middleIndex; // Start at index 4 (after 2 clones)
+    // Start at the middle item (index 2 for 5 items)
+    const middleIndex = Math.floor(totalItems / 2);
+    let currentIndex = middleIndex; // Always the center index
     
     let autoAdvanceTimer = null;
     let autoAdvanceRestartTimer = null;
     const AUTO_ADVANCE_INTERVAL = 3000; // 3 seconds
-    const AUTO_ADVANCE_RESTART_DELAY = 5000; // 5 seconds after last click
     
     // Calculate item width including gap
     function getItemWidth() {
-        const firstItem = allContainers[0];
+        const firstItem = blogItems[0];
         if (!firstItem) return 0;
         const itemWidth = firstItem.offsetWidth;
         const trackStyle = window.getComputedStyle(sliderTrack);
@@ -88,6 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return slider.offsetWidth;
     }
     
+    // Reorder DOM elements to match blogItems array
+    function reorderDOM() {
+        blogItems.forEach(item => {
+            sliderTrack.appendChild(item);
+        });
+    }
+    
     // Update slider position and active state
     function updateSlider(disableTransition = false) {
         // Wait for next frame to ensure layout is calculated
@@ -99,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const centerPosition = sliderWidth / 2;
             const itemCenter = itemWidth / 2;
             
-            // Calculate how much to translate to center the current item
+            // Calculate how much to translate to center the current item (always at middleIndex)
             const translateX = centerPosition - itemCenter - (currentIndex * itemWidth);
             
             if (disableTransition) {
@@ -112,8 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 sliderTrack.style.transform = `translateX(${translateX}px)`;
             }
             
-            // Update active state
-            allContainers.forEach((container, index) => {
+            // Update active state - currentIndex is always the center (middleIndex)
+            blogItems.forEach((container, index) => {
                 if (index === currentIndex) {
                     container.classList.add("active");
                 } else {
@@ -124,88 +110,162 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     let isTransitioning = false;
-    let pendingLoop = false;
-    
-    // Handle infinite loop after transition completes
-    function handleLoopAfterTransition() {
-        if (!pendingLoop) return;
-        
-        // Check if we're in cloned items and need to jump
-        if (currentIndex >= cloneCount + totalItems) {
-            // We're in the cloned items at the end
-            // These clones correspond to the first original items
-            // Example: If cloneCount=2, totalItems=5:
-            //   Index 7 (clone of original 0) -> jump to index 2 (original 0)
-            //   Index 8 (clone of original 1) -> jump to index 3 (original 1)
-            const offset = currentIndex - (cloneCount + totalItems);
-            currentIndex = cloneCount + offset;
-            updateSlider(true); // Instant jump without transition
-        } else if (currentIndex < cloneCount) {
-            // We're in the cloned items at the beginning
-            // These clones correspond to the last original items
-            // Example: If cloneCount=2, totalItems=5:
-            //   Index 0 (clone of original 3) -> jump to index 5 (original 3)
-            //   Index 1 (clone of original 4) -> jump to index 6 (original 4)
-            const offset = currentIndex;
-            currentIndex = totalItems + offset;
-            updateSlider(true); // Instant jump without transition
-        }
-        
-        isTransitioning = false;
-        pendingLoop = false;
-    }
+    let slideOffset = 0; // Track cumulative slide offset
     
     // Listen for transition end
     sliderTrack.addEventListener('transitionend', (e) => {
         // Only handle transform transitions, ignore other transitions
         if (e.propertyName === 'transform') {
-            if (pendingLoop) {
-                handleLoopAfterTransition();
-            } else {
-                isTransitioning = false;
+            // After slide completes, reorder items and reset position invisibly
+            const itemWidth = getItemWidth();
+            
+            if (slideOffset !== 0) {
+                // Reorder based on slide direction
+                if (slideOffset < 0) {
+                    // Slid left - move first item to end
+                    const firstItem = blogItems.shift();
+                    blogItems.push(firstItem);
+                } else {
+                    // Slid right - move last item to beginning
+                    const lastItem = blogItems.pop();
+                    blogItems.unshift(lastItem);
+                }
+                
+                // Reorder DOM
+                reorderDOM();
+                
+                // Reset transform position invisibly (no transition)
+                const sliderWidth = getSliderWidth();
+                const centerPosition = sliderWidth / 2;
+                const itemCenter = itemWidth / 2;
+                const targetX = centerPosition - itemCenter - (currentIndex * itemWidth);
+                
+                sliderTrack.style.transition = "none";
+                sliderTrack.style.transform = `translateX(${targetX}px)`;
+                sliderTrack.offsetHeight; // Force reflow
+                sliderTrack.style.transition = "";
+                
+                // Reset offset
+                slideOffset = 0;
+                
+                // Active state is already correct (was set before slide started)
+                // Just ensure it's still correct after reordering
+                blogItems.forEach((container, index) => {
+                    if (index === currentIndex) {
+                        container.classList.add("active");
+                    } else {
+                        container.classList.remove("active");
+                    }
+                });
             }
+            
+            // Re-enable buttons after transition completes
+            isTransitioning = false;
+            setButtonsEnabled(true);
         }
     });
     
-    // Go to next item
-    function nextSlide(isAutoAdvance = false) {
-        if (isTransitioning && !isAutoAdvance) return; // Prevent rapid clicks
-        
-        currentIndex++;
-        isTransitioning = true;
-        
-        // Check if we'll be in cloned items after increment
-        if (currentIndex >= cloneCount + totalItems) {
-            // We're about to enter cloned items at the end
-            // Allow smooth transition to the clone, then jump after transition
-            pendingLoop = true;
-            updateSlider(); // Smooth transition to clone
-        } else {
-            // Normal transition within original items
-            updateSlider();
-            if (!isAutoAdvance) {
-                resetAutoAdvance();
-            }
+    // Update button states
+    function setButtonsEnabled(enabled) {
+        if (leftBtn) {
+            leftBtn.disabled = !enabled;
+            leftBtn.style.pointerEvents = enabled ? 'auto' : 'none';
+            leftBtn.style.opacity = enabled ? '1' : '0.5';
+        }
+        if (rightBtn) {
+            rightBtn.disabled = !enabled;
+            rightBtn.style.pointerEvents = enabled ? 'auto' : 'none';
+            rightBtn.style.opacity = enabled ? '1' : '0.5';
         }
     }
     
-    // Go to previous item
-    function prevSlide() {
-        if (isTransitioning) return; // Prevent rapid clicks
+    // Go to next item (slide left - items flow to the left)
+    function nextSlide(isAutoAdvance = false) {
+        if (isTransitioning) return; // Prevent all clicks during transition
         
-        currentIndex--;
         isTransitioning = true;
+        setButtonsEnabled(false); // Disable buttons during transition
         
-        // Check if we'll be in cloned items after decrement
-        if (currentIndex < cloneCount) {
-            // We're about to enter cloned items at the beginning
-            // Allow smooth transition to the clone, then jump after transition
-            pendingLoop = true;
-            updateSlider(); // Smooth transition to clone
-        } else {
-            // Normal transition within original items
-            updateSlider();
+        // Get current transform
+        const currentTransform = sliderTrack.style.transform;
+        let currentX = 0;
+        if (currentTransform) {
+            const match = currentTransform.match(/translateX\(([^)]+)\)/);
+            if (match) {
+                currentX = parseFloat(match[1]);
+            }
         }
+        
+        // Calculate item width
+        const itemWidth = getItemWidth();
+        
+        // Determine which item will become active after the slide
+        // When sliding left, the next item (currentIndex + 1) will be at center
+        const nextActiveIndex = (currentIndex + 1) % totalItems;
+        
+        // Update active state IMMEDIATELY so zoom happens simultaneously with slide
+        blogItems.forEach((container, index) => {
+            if (index === nextActiveIndex) {
+                container.classList.add("active");
+            } else {
+                container.classList.remove("active");
+            }
+        });
+        
+        // Slide left by one item width (negative direction)
+        const targetX = currentX - itemWidth;
+        slideOffset = -itemWidth;
+        
+        // Animate the slide - this creates the flowing effect
+        // The zoom will happen simultaneously because active class is already applied
+        sliderTrack.style.transform = `translateX(${targetX}px)`;
+        
+        if (!isAutoAdvance) {
+            resetAutoAdvance();
+        }
+    }
+    
+    // Go to previous item (slide right - items flow to the right)
+    function prevSlide() {
+        if (isTransitioning) return; // Prevent all clicks during transition
+        
+        isTransitioning = true;
+        setButtonsEnabled(false); // Disable buttons during transition
+        
+        // Get current transform
+        const currentTransform = sliderTrack.style.transform;
+        let currentX = 0;
+        if (currentTransform) {
+            const match = currentTransform.match(/translateX\(([^)]+)\)/);
+            if (match) {
+                currentX = parseFloat(match[1]);
+            }
+        }
+        
+        // Calculate item width
+        const itemWidth = getItemWidth();
+        
+        // Determine which item will become active after the slide
+        // When sliding right, the previous item (currentIndex - 1) will be at center
+        const prevActiveIndex = (currentIndex - 1 + totalItems) % totalItems;
+        
+        // Update active state IMMEDIATELY so zoom happens simultaneously with slide
+        blogItems.forEach((container, index) => {
+            if (index === prevActiveIndex) {
+                container.classList.add("active");
+            } else {
+                container.classList.remove("active");
+            }
+        });
+        
+        // Slide right by one item width (positive direction)
+        const targetX = currentX + itemWidth;
+        slideOffset = itemWidth;
+        
+        // Animate the slide - this creates the flowing effect
+        // The zoom will happen simultaneously because active class is already applied
+        sliderTrack.style.transform = `translateX(${targetX}px)`;
+        
         resetAutoAdvance();
     }
     
@@ -239,24 +299,14 @@ document.addEventListener("DOMContentLoaded", () => {
             clearTimeout(autoAdvanceRestartTimer);
             autoAdvanceRestartTimer = null;
         }
-        // Set a new timer to restart auto-advance after 5 seconds of inactivity
-        // This ensures auto-advance only resumes if no button is clicked for 5 seconds
+        // Set a new timer to restart auto-advance after 3 seconds
         autoAdvanceRestartTimer = setTimeout(() => {
             startAutoAdvance();
             autoAdvanceRestartTimer = null;
-        }, AUTO_ADVANCE_RESTART_DELAY);
+        }, AUTO_ADVANCE_INTERVAL);
     }
     
-    function disableAutoAdvance() {
-        // Stop auto-advance and clear restart timer
-        stopAutoAdvance();
-        if (autoAdvanceRestartTimer) {
-            clearTimeout(autoAdvanceRestartTimer);
-            autoAdvanceRestartTimer = null;
-        }
-    }
-    
-    // Event listeners
+    // Event listeners for navigation buttons
     if (leftBtn) {
         leftBtn.addEventListener("click", () => {
             prevSlide();
@@ -269,23 +319,29 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     
-    // Pause auto-advance on hover
-    const sliderWrapper = document.querySelector(".blog-slider-wrapper");
-    if (sliderWrapper) {
-        sliderWrapper.addEventListener("mouseenter", () => {
-            disableAutoAdvance();
-        });
-        sliderWrapper.addEventListener("mouseleave", () => {
-            // Only restart if not already scheduled to restart
-            if (!autoAdvanceRestartTimer && !autoAdvanceTimer) {
-                resetAutoAdvance();
+    // Event listeners for blog item clicks - clicking a blog advances to next
+    blogItems.forEach((blogItem) => {
+        blogItem.addEventListener("click", () => {
+            if (!isTransitioning) {
+                nextSlide();
             }
         });
-    }
+        // Add cursor pointer style
+        blogItem.style.cursor = "pointer";
+    });
     
     // Initialize after a short delay to ensure layout is ready
     setTimeout(() => {
+        // Set initial active state
+        blogItems.forEach((container, index) => {
+            if (index === currentIndex) {
+                container.classList.add("active");
+            } else {
+                container.classList.remove("active");
+            }
+        });
         updateSlider();
+        setButtonsEnabled(true); // Ensure buttons are enabled
         startAutoAdvance();
     }, 100);
     
