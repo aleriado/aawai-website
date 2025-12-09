@@ -40,6 +40,14 @@
     transform: translateX(100%);
 }
 
+/* Hide loader wrapper when page is loaded */
+body.loaded #loader-wrapper {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
 /* Robot Container */
 .robot-container {
     position: relative;
