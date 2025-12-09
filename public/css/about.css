@@ -16,6 +16,18 @@ main {
     font-size: clamp(24px, 3vw, 42px);
     font-weight: 700;
     margin-bottom: 20px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state */
+.about-title.animate-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ===================================== */
@@ -30,6 +42,18 @@ main {
     overflow: hidden;
     padding: clamp(30px, 4vw, 60px);
     flex-wrap: wrap;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state */
+.about-wrapper.animate-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* LEFT SIDE */
@@ -43,22 +67,74 @@ main {
 .about-small {
     font-size: clamp(16px, 2vw, 24px);
     margin-bottom: 10px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.2s;
+}
+
+/* Animated state */
+.about-wrapper.animate-in .about-small {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .about-mid {
     font-size: clamp(20px, 2.5vw, 32px);
     font-weight: 600;
     margin-bottom: 10px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.3s;
+}
+
+/* Animated state */
+.about-wrapper.animate-in .about-mid {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .about-desc {
     font-size: clamp(14px, 1.8vw, 22px);
     margin-bottom: 20px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.4s;
+}
+
+/* Animated state */
+.about-wrapper.animate-in .about-desc {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .about-footer {
     font-size: clamp(12px, 1.4vw, 18px);
     opacity: 0.8;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.6s;
+}
+
+/* Animated state */
+.about-wrapper.animate-in .about-footer {
+    opacity: 0.8;
+    transform: translateX(0);
 }
 
 /* RIGHT SIDE VIDEO */
@@ -77,6 +153,34 @@ main {
     background-size: cover;
     background-position: center;
     position: relative;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.3s;
+}
+
+/* Animated state */
+.about-wrapper.animate-in .about-video {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.about-play {
+    /* Animation initial state */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.5s;
+}
+
+/* Animated state */
+.about-wrapper.animate-in .about-play {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .about-play {
@@ -91,10 +195,25 @@ main {
     top: 50%;
     cursor: pointer;
     transform: translate(-50%, -50%);
-    transition: 0.25s ease;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.5s;
 }
 
-.about-play:hover {
+/* Animated state */
+.about-wrapper.animate-in .about-play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+                scale 0.25s ease;
+}
+
+.about-wrapper.animate-in .about-play:hover {
     transform: translate(-50%, -50%) scale(1.12);
 }
 
@@ -112,6 +231,18 @@ main {
 .team-title {
     font-size: clamp(28px, 4vw, 54px);
     margin-bottom: 20px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state */
+.team-title.animate-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .team-desc {
@@ -119,6 +250,19 @@ main {
     line-height: 1.8;
     margin-bottom: clamp(30px, 5vw, 60px);
     opacity: 0.85;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.2s;
+}
+
+/* Animated state */
+.team-desc.animate-in {
+    opacity: 0.85;
+    transform: translateY(0);
 }
 
 .team-wrapper {
@@ -135,6 +279,18 @@ main {
 .member {
     width: clamp(240px, 22%, 300px);
     position: relative;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state */
+.member.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 .member img {
@@ -142,6 +298,20 @@ main {
     border-radius: 6px;
     filter: brightness(0.6);
     transition: 0.3s ease;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 1s cubic-bezier(0.19, 1, 0.22, 1),
+                filter 0.3s ease;
+    transition-delay: 0.2s;
+}
+
+/* Animated state */
+.member.animate-in img {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .member:hover img {
@@ -157,12 +327,38 @@ main {
 .member-name {
     font-size: clamp(14px, 1.4vw, 20px);
     font-weight: 600;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.4s;
+}
+
+/* Animated state */
+.member.animate-in .member-name {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .member-role {
     font-size: clamp(10px, 1vw, 14px);
     opacity: 0.85;
     letter-spacing: 1px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.5s;
+}
+
+/* Animated state */
+.member.animate-in .member-role {
+    opacity: 0.85;
+    transform: translateY(0);
 }
 
 /* ===================================== */
@@ -178,6 +374,15 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* Animated state */
+.mission-section.animate-in {
+    opacity: 1;
 }
 
 .mission-section>* {
@@ -191,6 +396,15 @@ main {
     inset: 0;
     background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(1px);
+    
+    /* Animation initial state */
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* Animated state */
+.mission-section.animate-in::after {
+    opacity: 1;
 }
 
 /* White note */
@@ -211,6 +425,19 @@ main {
     line-height: 1.6;
     max-width: 800px;
     margin-bottom: 40px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.2s;
+}
+
+/* Animated state */
+.mission-section.animate-in .mission-title {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .mission-subtext {
@@ -218,6 +445,19 @@ main {
     line-height: 1.8;
     opacity: 0.85;
     margin-bottom: 60px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.4s;
+}
+
+/* Animated state */
+.mission-section.animate-in .mission-subtext {
+    opacity: 0.85;
+    transform: translateY(0);
 }
 
 /* Values */
@@ -234,6 +474,18 @@ main {
     padding: clamp(20px, 4vw, 30px);
     border-radius: 10px;
     backdrop-filter: blur(6px);
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state */
+.value-box.animate-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .value-box h3 {
@@ -241,6 +493,19 @@ main {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.2s;
+}
+
+/* Animated state */
+.value-box.animate-in h3 {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .value-line {
@@ -249,12 +514,39 @@ main {
     background: #6D4BFF;
     border-radius: 3px;
     margin-right: 12px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.1s;
+}
+
+/* Animated state */
+.value-box.animate-in .value-line {
+    opacity: 1;
+    transform: scaleY(1);
 }
 
 .value-box p {
     font-size: clamp(12px, 1.4vw, 16px);
     line-height: 1.7;
     opacity: 0.9;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.4s;
+}
+
+/* Animated state */
+.value-box.animate-in p {
+    opacity: 0.9;
+    transform: translateX(0);
 }
 
 

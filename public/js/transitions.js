@@ -292,5 +292,128 @@ document.addEventListener("DOMContentLoaded", () => {
 
         bottomObserver.observe(serviceBottom);
     }
+
+    // -------------------------About Page Animations----------------------------
+
+    // Animate about title
+    const aboutTitle = document.querySelector(".about-title");
+    if (aboutTitle) {
+        const titleObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loaderComplete) {
+                    entry.target.classList.add("animate-in");
+                    titleObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        titleObserver.observe(aboutTitle);
+    }
+
+    // Animate about wrapper
+    const aboutWrapper = document.querySelector(".about-wrapper");
+    if (aboutWrapper) {
+        const wrapperObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                    entry.target.classList.add("animate-in");
+                    wrapperObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        wrapperObserver.observe(aboutWrapper);
+    }
+
+    // Animate team section
+    const teamTitle = document.querySelector(".team-title");
+    const teamDesc = document.querySelector(".team-desc");
+    
+    if (teamTitle) {
+        const teamTitleObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loaderComplete) {
+                    entry.target.classList.add("animate-in");
+                    teamTitleObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        teamTitleObserver.observe(teamTitle);
+    }
+
+    if (teamDesc) {
+        const teamDescObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loaderComplete) {
+                    entry.target.classList.add("animate-in");
+                    teamDescObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        teamDescObserver.observe(teamDesc);
+    }
+
+    // Animate team members with staggered delay
+    const members = document.querySelectorAll(".member");
+    if (members.length > 0) {
+        const memberObserver = new IntersectionObserver(entries => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                    setTimeout(() => {
+                        entry.target.classList.add("animate-in");
+                    }, index * 150); // 150ms delay between each member
+                    memberObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        members.forEach(member => memberObserver.observe(member));
+    }
+
+    // Animate mission section
+    const missionSection = document.querySelector(".mission-section");
+    if (missionSection) {
+        const missionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                    entry.target.classList.add("animate-in");
+                    missionObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.2,
+            rootMargin: "0px 0px -100px 0px"
+        });
+
+        missionObserver.observe(missionSection);
+    }
+
+    // Animate value boxes with staggered delay
+    const valueBoxes = document.querySelectorAll(".value-box");
+    if (valueBoxes.length > 0) {
+        const valueObserver = new IntersectionObserver(entries => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                    setTimeout(() => {
+                        entry.target.classList.add("animate-in");
+                    }, index * 150); // 150ms delay between each box
+                    valueObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        valueBoxes.forEach(box => valueObserver.observe(box));
+    }
 });
 

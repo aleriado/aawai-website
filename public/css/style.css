@@ -1171,14 +1171,6 @@ nav {
 }
 
 @media (max-width: 500px) {
-    .sb-right .sb-btn :first-child {
-        display: none;
-    }
-
-    .sb-right .sb-btn {
-        width: 100%;
-        justify-content: center;
-    }
 
     .service-banner {
         margin-left: 10px;
