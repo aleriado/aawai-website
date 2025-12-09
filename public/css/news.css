@@ -16,22 +16,88 @@ main {
     height: 100vh;
     text-align: center;
     padding: 20px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state */
+.news-container.animate-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .news-heading {
     font-size: clamp(30px, 5vw, 50px);
     font-weight: 700;
     margin-bottom: 20px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.2s;
+}
+
+/* Animated state */
+.news-container.animate-in .news-heading {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.news-message {
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.4s;
+}
+
+/* Animated state */
+.news-container.animate-in .news-message {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .news-message h2 {
     font-size: clamp(20px, 3vw, 30px);
     font-weight: 600;
     margin-bottom: 10px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.6s;
+}
+
+/* Animated state */
+.news-container.animate-in .news-message h2 {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .news-message p {
     font-size: clamp(14px, 2vw, 20px);
     opacity: 0.7;
     margin-top: 10px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.8s;
+}
+
+/* Animated state */
+.news-container.animate-in .news-message p {
+    opacity: 0.7;
+    transform: translateY(0);
 }
