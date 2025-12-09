@@ -457,3 +457,52 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+/*===================== Privacy Policy Scroll Animations ================== */
+
+// Wait for page to fully load before starting animations
+window.addEventListener('load', () => {
+    // Only run on privacy policy page
+    const privacyContent = document.querySelector('.privacypolicy-content');
+    if (!privacyContent) return;
+
+    const animatedElements = document.querySelectorAll('.pp-animate');
+    
+    if (animatedElements.length === 0) return;
+
+    // Small delay to ensure page is fully rendered
+    setTimeout(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0% 0% -10% 0%',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+                    // Stagger animations for smooth reveal
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        animatedElements.forEach((el) => {
+            observer.observe(el);
+        });
+
+        // If elements are already visible on load, trigger them immediately
+        animatedElements.forEach((el, index) => {
+            const rect = el.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
+            if (isVisible && !el.classList.contains('visible')) {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 100);
+            }
+        });
+    }, 300);
+});
