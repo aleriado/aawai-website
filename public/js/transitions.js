@@ -435,5 +435,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         newsObserver.observe(newsContainer);
     }
+
+    // -------------------------Contact Page Animations----------------------------
+
+    // Animate contact container
+    const contactContainer = document.querySelector(".contact-container");
+    if (contactContainer) {
+        const contactObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                    entry.target.classList.add("animate-in");
+                    contactObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.2,
+            rootMargin: "0px 0px -100px 0px"
+        });
+
+        contactObserver.observe(contactContainer);
+    }
 });
 

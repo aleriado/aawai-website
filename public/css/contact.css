@@ -8,6 +8,8 @@
     position: relative;
     flex-direction: column;
     /* Stack elements on smaller screens */
+    
+    overflow: hidden;
 }
 
 /* Background Image */
@@ -21,6 +23,17 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+/* Animated state */
+.contact-container.animate-in .contact-image {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Overlay for the background */
@@ -33,6 +46,15 @@
     background: rgba(0, 0, 0, 0.6);
     /* Black overlay */
     z-index: 1;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* Animated state */
+.contact-container.animate-in .contact-image .overlay {
+    opacity: 1;
 }
 
 /* Contact Form Container */
@@ -49,6 +71,18 @@
     padding: clamp(20px, 4vw, 30px);
     border-radius: 10px;
     backdrop-filter: blur(6px);
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: opacity 0.9s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state */
+.contact-container.animate-in .contact-form {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 /* Title and Text */
@@ -56,11 +90,37 @@
     font-size: clamp(24px, 5vw, 32px);
     font-weight: bold;
     margin-bottom: 20px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.2s;
+}
+
+/* Animated state */
+.contact-container.animate-in .contact-form h1 {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .contact-form p {
     font-size: clamp(14px, 2vw, 18px);
     margin-bottom: 30px;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: 0.3s;
+}
+
+/* Animated state */
+.contact-container.animate-in .contact-form p {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Form Groups */
@@ -76,6 +136,48 @@
     box-sizing: border-box;
     /* Desktop: three items per row */
     flex: 0 0 calc(33.333% - 13.333px);
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state - form groups animate when container is animated */
+.contact-container.animate-in .form-group {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for form groups */
+.contact-container.animate-in .form-row:nth-of-type(1) .form-group:nth-of-type(1) {
+    transition-delay: 0.4s;
+}
+
+.contact-container.animate-in .form-row:nth-of-type(1) .form-group:nth-of-type(2) {
+    transition-delay: 0.5s;
+}
+
+.contact-container.animate-in .form-row:nth-of-type(1) .form-group:nth-of-type(3) {
+    transition-delay: 0.6s;
+}
+
+.contact-container.animate-in .form-row:nth-of-type(2) .form-group:nth-of-type(1) {
+    transition-delay: 0.7s;
+}
+
+.contact-container.animate-in .form-row:nth-of-type(2) .form-group:nth-of-type(2) {
+    transition-delay: 0.8s;
+}
+
+.contact-container.animate-in .form-row:nth-of-type(2) .form-group:nth-of-type(3) {
+    transition-delay: 0.9s;
+}
+
+/* Single form group (textarea) - not inside form-row */
+.contact-container.animate-in form > .form-group:not(.form-row) {
+    transition-delay: 1s;
 }
 
 /* Form Inputs and Textarea */
@@ -83,6 +185,18 @@
     font-size: clamp(14px, 2vw, 16px);
     margin-bottom: 8px;
     display: block;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Animated state */
+.contact-container.animate-in .form-group label {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .form-group input,
@@ -94,8 +208,30 @@
     border-radius: 6px;
     box-sizing: border-box;
     opacity: 0.5;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
     background-color: rgba(255, 255, 255, 0.5);
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 0.3s ease;
+}
+
+/* Animated state */
+.contact-container.animate-in .form-group input,
+.contact-container.animate-in .form-group textarea {
+    opacity: 0.5;
+    transform: translateY(0);
+}
+
+.contact-container.animate-in .form-group input:focus,
+.contact-container.animate-in .form-group input:active,
+.contact-container.animate-in .form-group textarea:focus,
+.contact-container.animate-in .form-group textarea:active {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .form-group input:focus,
@@ -120,11 +256,28 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+    transition-delay: 1s;
 }
 
-.submit-btn:hover {
+/* Animated state */
+.contact-container.animate-in .submit-btn {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.contact-container.animate-in .submit-btn:hover {
     background-color: #8B68FF;
+    transform: translateY(-3px) scale(1);
+    box-shadow: 0 6px 18px rgba(109, 75, 255, 0.35);
 }
 
 .form-column {
