@@ -229,3 +229,68 @@ document.addEventListener("DOMContentLoaded", () => {
     allTargets.forEach(el => observer.observe(el));
 });
 
+// -------------------------Service Page Animations----------------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+    let loaderComplete = true; // loader removed, allow immediately
+
+    // Wait for loader to complete
+    window.addEventListener('loaderComplete', () => {
+        loaderComplete = true;
+    });
+
+    // Animate services title
+    const servicesTitle = document.querySelector(".services-title");
+    if (servicesTitle) {
+        const titleObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loaderComplete) {
+                    entry.target.classList.add("animate-in");
+                    titleObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        titleObserver.observe(servicesTitle);
+    }
+
+    // Animate service boxes with staggered delay
+    const serviceBoxes = document.querySelectorAll(".service-box");
+    if (serviceBoxes.length > 0) {
+        const boxObserver = new IntersectionObserver(entries => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                    // Stagger animation for each box
+                    setTimeout(() => {
+                        entry.target.classList.add("animate-in");
+                    }, index * 150); // 150ms delay between each box
+                    boxObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        serviceBoxes.forEach(box => boxObserver.observe(box));
+    }
+
+    // Animate service-bottom section
+    const serviceBottom = document.querySelector(".service-bottom");
+    if (serviceBottom) {
+        const bottomObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                    entry.target.classList.add("animate-in");
+                    bottomObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.3,
+            rootMargin: "0px 0px -100px 0px"
+        });
+
+        bottomObserver.observe(serviceBottom);
+    }
+});
+
