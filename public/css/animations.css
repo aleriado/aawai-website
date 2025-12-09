@@ -464,39 +464,39 @@ body:not(.loaded) .hero-animated-text {
 /* Initial hidden state for hero-subtext */
 .hero-subtext {
     opacity: 0;
-    transform: translateY(22px) scale(0.98);
-    filter: blur(10px);
+    transform: translateX(-50px);
+    filter: none;
     pointer-events: none;
 }
 
 /* Wait for loader to complete before allowing animation */
 body:not(.loaded) .hero-subtext {
     opacity: 0;
-    transform: translateY(22px) scale(0.98);
-    filter: blur(10px);
+    transform: translateX(-50px);
+    filter: none;
 }
 
 /* Visible animation state */
 .hero-subtext.visible {
-    animation: heroSubtextFloat 0.9s cubic-bezier(.19, 1, .22, 1) forwards;
+    animation: heroSubtextFloat 1.2s cubic-bezier(.19, 1, .22, 1) forwards;
     pointer-events: auto;
 }
 
 @keyframes heroSubtextFloat {
     0% {
         opacity: 0;
-        transform: translateY(22px) scale(0.98);
-        filter: blur(10px);
+        transform: translateX(-50px);
+        filter: none;
     }
     60% {
         opacity: 1;
-        transform: translateY(-2px) scale(1.01);
-        filter: blur(2px);
+        transform: translateX(6px);
+        filter: none;
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
+        transform: translateX(0);
+        filter: none;
     }
 }
 
@@ -505,69 +505,69 @@ body:not(.loaded) .hero-subtext {
 /* Parent container initially hidden */
 .hero-buttons {
     opacity: 0;
-    transform: translateY(26px) scale(0.97);
-    filter: blur(12px);
+    transform: translateY(32px) scale(0.9);
+    filter: none;
     pointer-events: none;
 }
 
 /* Wait for loader to complete before allowing animation */
 body:not(.loaded) .hero-buttons {
     opacity: 0;
-    transform: translateY(26px) scale(0.97);
-    filter: blur(12px);
+    transform: translateY(32px) scale(0.9);
+    filter: none;
 }
 
 /* When visible (scroll-trigger) */
 .hero-buttons.visible {
-    animation: heroButtonsLift 0.7s cubic-bezier(.19, 1, .22, 1) forwards;
+    animation: heroButtonsLift 1s cubic-bezier(.19, 1, .22, 1) forwards;
     pointer-events: auto;
 }
 
 @keyframes heroButtonsLift {
     0% {
         opacity: 0;
-        transform: translateY(26px) scale(0.97);
-        filter: blur(12px);
+        transform: translateY(32px) scale(0.9);
+        filter: none;
     }
     65% {
         opacity: 1;
-        transform: translateY(-4px) scale(1.01);
-        filter: blur(3px);
+        transform: translateY(-6px) scale(1.06);
+        filter: none;
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
+        transform: translateY(0) scale(1.02);
+        filter: none;
     }
 }
 
 /* ---- Individual button animations ---- */
 .hero-buttons .btn {
     opacity: 0;
-    transform: translateY(18px) scale(0.94);
-    filter: blur(8px);
+    transform: translateY(26px) scale(0.88);
+    filter: none;
 }
 
 /* Buttons visible after parent reveal */
 .hero-buttons.visible .btn {
-    animation: heroButtonRise 0.55s cubic-bezier(.19, 1, .22, 1) forwards;
+    animation: heroButtonRise 0.9s cubic-bezier(.19, 1, .22, 1) forwards;
 }
 
 @keyframes heroButtonRise {
     0% {
         opacity: 0;
-        transform: translateY(18px) scale(0.94);
-        filter: blur(8px);
+        transform: translateY(26px) scale(0.88);
+        filter: none;
     }
     70% {
         opacity: 1;
-        transform: translateY(-2px) scale(1.01);
-        filter: blur(1px);
+        transform: translateY(-6px) scale(1.08);
+        filter: none;
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
+        transform: translateY(0) scale(1.02);
+        filter: none;
     }
 }
 

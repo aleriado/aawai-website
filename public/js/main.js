@@ -373,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
 /*===================== Business Item Animation ================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    let loaderComplete = false;
+    let loaderComplete = true; // loader removed, allow immediately
 
     // Wait for loader to complete
     window.addEventListener('loaderComplete', () => {
@@ -386,8 +386,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const businessOptions = {
         root: null,
-        rootMargin: "0% 0% -20% 0%",
-        threshold: 0,
+        rootMargin: "0% 0% -10% 0%",
+        threshold: 0.1,
     };
     
     const businessObserver = new IntersectionObserver(businessCallback, businessOptions);
@@ -413,14 +413,19 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const imageOptions = {
         root: null,
-        rootMargin: "0% 0% -20% 0%",
-        threshold: 0,
+        rootMargin: "0% 0% -10% 0%",
+        threshold: 0.1,
     };
     
     const imageObserver = new IntersectionObserver(imageCallback, imageOptions);
     targetArray.forEach((tgt) => {
         imageObserver.observe(tgt);
     });
+
+    // Reveal images already in view on load
+    revealVisibleImages();
+    window.addEventListener('scroll', revealVisibleImages, { passive: true });
+    window.addEventListener('resize', revealVisibleImages);
     
     function imageCallback(entries) {
         entries.forEach(function (entry, i) {
@@ -430,6 +435,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(function () {
                     target.classList.add("_show");
                 }, delay);
+            }
+        });
+    }
+
+    function isInView(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
+    }
+
+    function revealVisibleImages() {
+        targetArray.forEach((tgt) => {
+            if (!tgt.classList.contains("_show") && loaderComplete && isInView(tgt)) {
+                tgt.classList.add("_show");
             }
         });
     }

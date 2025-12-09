@@ -691,6 +691,23 @@ nav {
     border-radius: 12px;
     margin-bottom: 12px;
     object-fit: cover;
+    clip-path: polygon(0 0, 16% 0, 0 16%);
+    transform-origin: top left;
+    transform: translate(-8px, -8px) rotate(-6deg) scale(0.9);
+    opacity: 0;
+    box-shadow: 0 18px 28px rgba(0, 0, 0, 0.14);
+    transition:
+        clip-path 0.7s cubic-bezier(0.25, 0.9, 0.3, 1.2),
+        transform 0.7s cubic-bezier(0.25, 0.9, 0.3, 1.2),
+        opacity 0.4s ease;
+    will-change: clip-path, transform, opacity;
+}
+
+.news-item img._show {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
 }
 
 .news-item h4 {
@@ -849,11 +866,15 @@ nav {
     transform: translateY(-50%);
     max-width: 50%;
     overflow: visible;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(126,216,255,0.35));
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
 }
 
 .biz-image img {
     height: clamp(200px, 30vw, 420px);
-    border-radius: 20px;
+    border-radius: 14px;
     object-fit: cover;
     width: 100%;
     opacity: 0;
@@ -864,13 +885,16 @@ nav {
         0 8px 16px rgba(0, 0, 0, 0.12);
     transition:
         opacity 0.55s ease-out,
-        transform 0.9s cubic-bezier(0.22, 1.05, 0.36, 1);
-    will-change: transform, opacity;
+        transform 0.9s cubic-bezier(0.22, 1.05, 0.36, 1),
+        clip-path 0.75s cubic-bezier(0.25, 0.9, 0.3, 1.2);
+    clip-path: polygon(70% 0%, 100% 0%, 100% 20%, 82% 6%);
+    will-change: transform, opacity, clip-path;
 }
 
 .biz-image img._show {
     opacity: 1;
     transform: translateY(0) rotate(0deg) scale(1);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     box-shadow:
         0 12px 28px rgba(0, 0, 0, 0.14),
         0 6px 16px rgba(0, 0, 0, 0.12);
