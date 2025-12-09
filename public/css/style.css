@@ -1140,9 +1140,9 @@ nav {
 
 .sb-right .sb-btn {
     display: flex;
-    width: fit-content;
+    width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: clamp(8px, 1.4vw, 16px);
     background: #111;
     color: #fff;
