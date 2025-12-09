@@ -571,6 +571,20 @@ body:not(.loaded) .hero-buttons {
     }
 }
 
+@keyframes binaryDrift {
+    from {
+        transform: translateX(-20%);
+    }
+    to {
+        transform: translateX(20%);
+    }
+}
+
+@keyframes binaryMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 /* Stagger timing */
 .hero-buttons.visible .btn:nth-child(1) {
     animation-delay: 0.20s;
@@ -608,6 +622,8 @@ body:not(.loaded) .hero-buttons {
 
 /* Initial hidden state */
 .company-info-text {
+    position: relative;
+    overflow: hidden;
     opacity: 0;
     transform: translateX(-200px);
     /* filter: blur(12px); */
@@ -631,6 +647,34 @@ body:not(.loaded) .hero-buttons {
     opacity: 1;
     transform: translateX(0);
     /* filter: blur(0); */
+}
+
+/* Binary code flow overlay */
+.company-info-text::before {
+    content: "01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110 01001001 01011101 01010110 1110110";
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    min-width: 200%;
+    font-family: "Courier New", monospace;
+    font-size: clamp(16px, 5vw, 24px);
+    letter-spacing: 2px;
+    line-height: 1.6;
+    color: rgba(0, 255, 136, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    text-shadow:
+        0 0 6px rgba(0, 255, 136, 0.35),
+        0 0 12px rgba(0, 255, 136, 0.25);
+    transform: translateX(0);
+    animation: binaryMarquee 12s linear infinite;
+    animation-play-state: running;
+    will-change: transform;
+}
+
+.company-info-text.visible::before {
+    opacity: 1;
 }
 
 /* ----------------View More Button-------------------- */

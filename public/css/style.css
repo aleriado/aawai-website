@@ -693,14 +693,15 @@ nav {
     object-fit: cover;
     clip-path: polygon(0 0, 16% 0, 0 16%);
     transform-origin: top left;
-    transform: translate(-8px, -8px) rotate(-6deg) scale(0.9);
+    transform: translate(-16px, -16px) rotate(-6deg) scale(0.9);
     opacity: 0;
     box-shadow: 0 18px 28px rgba(0, 0, 0, 0.14);
     transition:
-        clip-path 0.7s cubic-bezier(0.25, 0.9, 0.3, 1.2),
-        transform 0.7s cubic-bezier(0.25, 0.9, 0.3, 1.2),
+        clip-path 1.2s cubic-bezier(0.25, 0.9, 0.3, 1.2),
+        transform 1s cubic-bezier(0.25, 0.9, 0.3, 1.2),
         opacity 0.4s ease;
     will-change: clip-path, transform, opacity;
+    transition-delay: 0.3s;
 }
 
 .news-item img._show {
@@ -874,7 +875,7 @@ nav {
 
 .biz-image img {
     height: clamp(200px, 30vw, 420px);
-    border-radius: 14px;
+    border-radius: 8px;
     object-fit: cover;
     width: 100%;
     opacity: 0;
@@ -886,9 +887,10 @@ nav {
     transition:
         opacity 0.55s ease-out,
         transform 0.9s cubic-bezier(0.22, 1.05, 0.36, 1),
-        clip-path 0.75s cubic-bezier(0.25, 0.9, 0.3, 1.2);
+        clip-path 1s cubic-bezier(0.25, 0.9, 0.3, 1.2);
     clip-path: polygon(70% 0%, 100% 0%, 100% 20%, 82% 6%);
     will-change: transform, opacity, clip-path;
+    transition-delay: 0.5s;
 }
 
 .biz-image img._show {
@@ -955,7 +957,7 @@ nav {
     justify-content: center;
     margin-bottom: clamp(12px, 2vw, 20px);
     text-align: center;
-    padding: 0 10px;
+    padding: 5px 10px;
     line-height: 1.5;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -1021,7 +1023,7 @@ nav {
     object-fit: contain;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.3s ease;
     display: block;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     max-height: none;
 }
 

@@ -414,7 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const imageOptions = {
         root: null,
         rootMargin: "0% 0% -10% 0%",
-        threshold: 0.1,
+        threshold: 0.5, // wait until half visible to unfold
     };
     
     const imageObserver = new IntersectionObserver(imageCallback, imageOptions);
@@ -431,6 +431,11 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach(function (entry, i) {
             const target = entry.target;
             if (entry.isIntersecting && !target.classList.contains("_show") && loaderComplete) {
+                // Ensure parent card is already revealed
+                const parent = target.closest(".business-item");
+                if (parent && !parent.classList.contains("_show")) {
+                    return;
+                }
                 const delay = i * 100;
                 setTimeout(function () {
                     target.classList.add("_show");
@@ -441,7 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function isInView(el) {
         const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
+        return rect.top < window.innerHeight * 0.9 && rect.bottom > window.innerHeight * 0.1;
     }
 
     function revealVisibleImages() {
