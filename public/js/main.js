@@ -345,20 +345,10 @@ document.addEventListener("DOMContentLoaded", () => {
         startAutoAdvance();
     }
     
-    // Listen for loader completion
-    window.addEventListener('loaderComplete', () => {
-        // Initialize after a short delay to ensure layout is ready
-        setTimeout(() => {
-            initializeBlogSlider();
-        }, 100);
-    });
-    
-    // Fallback: if loader already completed, initialize immediately
-    if (document.body.classList.contains('loaded')) {
-        setTimeout(() => {
-            initializeBlogSlider();
-        }, 100);
-    }
+    // Initialize after a short delay to ensure layout is ready
+    setTimeout(() => {
+        initializeBlogSlider();
+    }, 100);
     
     // Update on window resize
     let resizeTimeout;
@@ -373,13 +363,6 @@ document.addEventListener("DOMContentLoaded", () => {
 /*===================== Business Item Animation ================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    let loaderComplete = true; // loader removed, allow immediately
-
-    // Wait for loader to complete
-    window.addEventListener('loaderComplete', () => {
-        loaderComplete = true;
-    });
-
     // Observer for business-item containers
     const businessItems = document.querySelectorAll(".business-item");
     const businessItemsArray = Array.prototype.slice.call(businessItems);
@@ -398,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function businessCallback(entries) {
         entries.forEach(function (entry, i) {
             const target = entry.target;
-            if (entry.isIntersecting && !target.classList.contains("_show") && loaderComplete) {
+            if (entry.isIntersecting && !target.classList.contains("_show")) {
                 const delay = i * 100;
                 setTimeout(function () {
                     target.classList.add("_show");
@@ -430,7 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function imageCallback(entries) {
         entries.forEach(function (entry, i) {
             const target = entry.target;
-            if (entry.isIntersecting && !target.classList.contains("_show") && loaderComplete) {
+            if (entry.isIntersecting && !target.classList.contains("_show")) {
                 // Ensure parent card is already revealed
                 const parent = target.closest(".business-item");
                 if (parent && !parent.classList.contains("_show")) {
@@ -451,7 +434,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function revealVisibleImages() {
         targetArray.forEach((tgt) => {
-            if (!tgt.classList.contains("_show") && loaderComplete && isInView(tgt)) {
+            if (!tgt.classList.contains("_show") && isInView(tgt)) {
                 tgt.classList.add("_show");
             }
         });

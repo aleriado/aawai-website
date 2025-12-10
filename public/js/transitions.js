@@ -1,11 +1,4 @@
-// =================== LOADER BYPASS (LOADING PAGE REMOVED) ===================
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Immediately mark as loaded and notify listeners
-    document.body.classList.add('loaded');
-    const loaderCompleteEvent = new CustomEvent('loaderComplete');
-    window.dispatchEvent(loaderCompleteEvent);
-});
+// =================== ANIMATIONS INITIALIZATION ===================
 
 // -----------------------Hero Text-------------------------
 
@@ -17,24 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!heroText) return;
 
     let animationDone = false;
-    let loaderComplete = true; // loader removed, allow immediately
-
-    // Wait for loader to complete before starting animations
-    window.addEventListener('loaderComplete', () => {
-        loaderComplete = true;
-        // If hero text is already visible, start animation
-        if (isInView(heroText) && !animationDone) {
-            animationDone = true;
-            runHeroAnimation(heroText);
-        }
-        // Trigger other hero elements if already in view
-        revealExtrasIfInView();
-    });
 
     // Create intersection observer for hero title
     const heroObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !animationDone && loaderComplete) {
+            if (entry.isIntersecting && !animationDone) {
                 animationDone = true;
                 heroObserver.unobserve(heroText);
                 runHeroAnimation(heroText);
@@ -44,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     heroObserver.observe(heroText);
 
-    // Observers for subtext, buttons, and counts so they animate only when visible and loader done
+    // Observers for subtext, buttons, and counts so they animate only when visible
     const extras = [];
     if (heroSubtext) extras.push(heroSubtext);
     if (heroButtons) extras.push(heroButtons);
@@ -52,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const extrasObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             const el = entry.target;
-            if (entry.isIntersecting && loaderComplete) {
+            if (entry.isIntersecting) {
                 if (el === heroSubtext || el === heroButtons) {
                     el.classList.add("visible");
                 }
@@ -66,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const countsObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             const el = entry.target;
-            if (entry.isIntersecting && loaderComplete && el.dataset.done !== "true") {
+            if (entry.isIntersecting && el.dataset.done !== "true") {
                 animateCount(el);
                 countsObserver.unobserve(el);
             }
@@ -74,25 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.1 });
 
     counts.forEach(c => countsObserver.observe(c));
-
-    // Helpers
-    function isInView(el) {
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
-    }
-
-    function revealExtrasIfInView() {
-        if (loaderComplete) {
-            if (heroSubtext && isInView(heroSubtext)) heroSubtext.classList.add("visible");
-            if (heroButtons && isInView(heroButtons)) heroButtons.classList.add("visible");
-            counts.forEach(c => {
-                if (isInView(c) && c.dataset.done !== "true") {
-                    animateCount(c);
-                    c.dataset.done = "true";
-                }
-            });
-        }
-    }
 
     // Animation function
     function runHeroAnimation(element) {
@@ -154,18 +115,11 @@ function animateCount(el) {
 // -------------------------Text Note Animation------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
-    let loaderComplete = true; // loader removed, allow immediately
-
-    // Wait for loader to complete
-    window.addEventListener('loaderComplete', () => {
-        loaderComplete = true;
-    });
-
     const notes = document.querySelectorAll(".text-note");
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && loaderComplete) {
+            if (entry.isIntersecting) {
                 entry.target.classList.add("visible");
                 observer.unobserve(entry.target);
             }
@@ -181,13 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // -------------------------Company Info----------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
-    let loaderComplete = true; // loader removed, allow immediately
-
-    // Wait for loader to complete
-    window.addEventListener('loaderComplete', () => {
-        loaderComplete = true;
-    });
-
     const animatedSelectors = [
         ".company-info-text",
         ".btn-more",
@@ -208,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.intersectionRatio >= 0.4 && loaderComplete) {
+            if (entry.intersectionRatio >= 0.4) {
 
                 // If it's a COUNT element → run animation
                 if (entry.target.classList.contains("count")) {
@@ -232,19 +179,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // -------------------------Service Page Animations----------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
-    let loaderComplete = true; // loader removed, allow immediately
-
-    // Wait for loader to complete
-    window.addEventListener('loaderComplete', () => {
-        loaderComplete = true;
-    });
-
     // Animate services title
     const servicesTitle = document.querySelector(".services-title");
     if (servicesTitle) {
         const titleObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete) {
+                if (entry.isIntersecting) {
                     entry.target.classList.add("animate-in");
                     titleObserver.unobserve(entry.target);
                 }
@@ -259,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (serviceBoxes.length > 0) {
         const boxObserver = new IntersectionObserver(entries => {
             entries.forEach((entry, index) => {
-                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                if (entry.isIntersecting && !entry.target.classList.contains("animate-in")) {
                     // Stagger animation for each box
                     setTimeout(() => {
                         entry.target.classList.add("animate-in");
@@ -280,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (serviceBottom) {
         const bottomObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                if (entry.isIntersecting && !entry.target.classList.contains("animate-in")) {
                     entry.target.classList.add("animate-in");
                     bottomObserver.unobserve(entry.target);
                 }
@@ -300,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (aboutTitle) {
         const titleObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete) {
+                if (entry.isIntersecting) {
                     entry.target.classList.add("animate-in");
                     titleObserver.unobserve(entry.target);
                 }
@@ -315,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (aboutWrapper) {
         const wrapperObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                if (entry.isIntersecting && !entry.target.classList.contains("animate-in")) {
                     entry.target.classList.add("animate-in");
                     wrapperObserver.unobserve(entry.target);
                 }
@@ -335,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (teamTitle) {
         const teamTitleObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete) {
+                if (entry.isIntersecting) {
                     entry.target.classList.add("animate-in");
                     teamTitleObserver.unobserve(entry.target);
                 }
@@ -348,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (teamDesc) {
         const teamDescObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete) {
+                if (entry.isIntersecting) {
                     entry.target.classList.add("animate-in");
                     teamDescObserver.unobserve(entry.target);
                 }
@@ -363,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (members.length > 0) {
         const memberObserver = new IntersectionObserver(entries => {
             entries.forEach((entry, index) => {
-                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                if (entry.isIntersecting && !entry.target.classList.contains("animate-in")) {
                     setTimeout(() => {
                         entry.target.classList.add("animate-in");
                     }, index * 150); // 150ms delay between each member
@@ -383,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (missionSection) {
         const missionObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                if (entry.isIntersecting && !entry.target.classList.contains("animate-in")) {
                     entry.target.classList.add("animate-in");
                     missionObserver.unobserve(entry.target);
                 }
@@ -401,7 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (valueBoxes.length > 0) {
         const valueObserver = new IntersectionObserver(entries => {
             entries.forEach((entry, index) => {
-                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                if (entry.isIntersecting && !entry.target.classList.contains("animate-in")) {
                     setTimeout(() => {
                         entry.target.classList.add("animate-in");
                     }, index * 150); // 150ms delay between each box
@@ -423,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (newsContainer) {
         const newsObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                if (entry.isIntersecting && !entry.target.classList.contains("animate-in")) {
                     entry.target.classList.add("animate-in");
                     newsObserver.unobserve(entry.target);
                 }
@@ -443,7 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contactContainer) {
         const contactObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && loaderComplete && !entry.target.classList.contains("animate-in")) {
+                if (entry.isIntersecting && !entry.target.classList.contains("animate-in")) {
                     entry.target.classList.add("animate-in");
                     contactObserver.unobserve(entry.target);
                 }
