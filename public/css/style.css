@@ -64,6 +64,50 @@ body {
     .chat-button p {
         display: none;
     }
+    
+    /* AI Robot-like Animation for Mobile Chat Button */
+    .chat-button {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        animation: chatButtonFloatPulse 3s ease-in-out infinite;
+        transform-origin: center;
+    }
+    
+    .chat-button::before {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #7ed8ff 0%, #a28bff 50%, #ff9bd1 100%);
+        opacity: 0;
+        z-index: -1;
+        animation: chatButtonAura 2.5s ease-in-out infinite;
+        filter: blur(8px);
+        pointer-events: none;
+    }
+    
+    .chat-button::after {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: 14px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        opacity: 0;
+        animation: chatButtonRing 2s ease-in-out infinite;
+        pointer-events: none;
+    }
+    
+    /* Enhanced active state on mobile */
+    .chat-button:active {
+        animation: chatButtonClick 0.3s ease, chatButtonFloatPulse 3s ease-in-out infinite 0.3s;
+    }
+    
+    /* Animate the SVG icon inside */
+    .chat-button svg {
+        animation: chatButtonIconPulse 2s ease-in-out infinite;
+        transform-origin: center;
+    }
 }
 
 /* =================== HEADER =================== */
