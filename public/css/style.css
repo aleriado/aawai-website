@@ -519,8 +519,8 @@ nav {
 
 .btn-more {
     position: absolute;
-    bottom: clamp(20px, 4vw, 50px);
-    margin-left: clamp(20px, 4vw, 50px);
+    bottom: clamp(10px, 4vw, 50px);
+    left: clamp(20px, 4vw, 50px);
     z-index: 10;
 }
 
