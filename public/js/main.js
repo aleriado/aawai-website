@@ -2,8 +2,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     let lastScroll = 0;
     const header = document.querySelector("header");
+    const mobileMenu = document.querySelector(".mobile-menu");
 
     window.addEventListener("scroll", () => {
+        // Don't hide header if mobile menu is open
+        if (mobileMenu && mobileMenu.classList.contains("open")) {
+            header.classList.remove("hidden");
+            return;
+        }
+
         const currentScroll = window.pageYOffset;
 
         if (currentScroll > 300 && currentScroll > lastScroll) {
