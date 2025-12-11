@@ -13,7 +13,7 @@ body {
 
 body {
     font-family: 'Noto Sans JP', rodin-light, osaka, sans-serif;
-    overflow-x: hidden;
+    overflow-x: clip;
     font-size: clamp(14px, 1vw, 18px);
     line-height: 1.6;
     background: #05060a;
@@ -37,8 +37,8 @@ body {
 /* =================== CHAT BUTTON =================== */
 .chat-button {
     position: fixed;
-    bottom: clamp(16px, 2vw, 30px);
-    right: clamp(16px, 2vw, 30px);
+    bottom: clamp(20px, 2vw, 40px);
+    right: clamp(20px, 2vw, 40px);
     background: #6D4BFF;
     color: #ffffff;
     text-decoration: none;
@@ -52,68 +52,56 @@ body {
     box-shadow: 0 2px 4px rgba(109, 75, 255, 0.4);
     transition: all 0.25s ease;
     z-index: 999;
+    animation: chatButtonFloatPulse 3s ease-in-out infinite;
+    transform-origin: center;
 }
 
-.chat-button:hover {
-    background: #8B68FF;
-    transform: translateY(-3px);
-    box-shadow: 0 2px 6px rgba(139, 104, 255, 0.6);
+.chat-button::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7ed8ff 0%, #a28bff 50%, #ff9bd1 100%);
+    opacity: 0;
+    z-index: -1;
+    animation: chatButtonAura 2.5s ease-in-out infinite;
+    filter: blur(8px);
+    pointer-events: none;
+}
+
+.chat-button::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    animation: chatButtonRing 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Enhanced active state on mobile */
+.chat-button:active {
+    animation: chatButtonClick 0.3s ease, chatButtonFloatPulse 3s ease-in-out infinite 0.3s;
+}
+
+/* Animate the SVG icon inside */
+.chat-button svg {
+    animation: chatButtonIconPulse 2s ease-in-out infinite;
+    transform-origin: center;
 }
 
 @media (max-width:768px) {
     .chat-button p {
         display: none;
     }
-    
-    /* AI Robot-like Animation for Mobile Chat Button */
-    .chat-button {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        animation: chatButtonFloatPulse 3s ease-in-out infinite;
-        transform-origin: center;
-    }
-    
-    .chat-button::before {
-        content: "";
-        position: absolute;
-        inset: -4px;
-        border-radius: 16px;
-        background: linear-gradient(135deg, #7ed8ff 0%, #a28bff 50%, #ff9bd1 100%);
-        opacity: 0;
-        z-index: -1;
-        animation: chatButtonAura 2.5s ease-in-out infinite;
-        filter: blur(8px);
-        pointer-events: none;
-    }
-    
-    .chat-button::after {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        border-radius: 14px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        opacity: 0;
-        animation: chatButtonRing 2s ease-in-out infinite;
-        pointer-events: none;
-    }
-    
-    /* Enhanced active state on mobile */
-    .chat-button:active {
-        animation: chatButtonClick 0.3s ease, chatButtonFloatPulse 3s ease-in-out infinite 0.3s;
-    }
-    
-    /* Animate the SVG icon inside */
-    .chat-button svg {
-        animation: chatButtonIconPulse 2s ease-in-out infinite;
-        transform-origin: center;
-    }
+
 }
 
 /* =================== HEADER =================== */
 header {
     width: 100%;
-    padding-inline: clamp(12px, 2vw, 32px);
+    padding-inline: clamp(12px, 3vw, 32px);
     padding-block: clamp(8px, 1vw, 16px);
     background: transparent;
     display: flex;
@@ -275,6 +263,7 @@ nav {
     gap: 24px;
     transition: right 0.4s ease;
     z-index: 150;
+    justify-content: center;
 }
 
 .mobile-menu a {
@@ -320,7 +309,7 @@ nav {
 /* =================== HERO =================== */
 .hero {
     width: 100%;
-    height: min(100vh, 920px);
+    height: 100vh;
     background: url("../assets/images/logo.avif") center/cover no-repeat fixed;
     position: relative;
     padding-top: clamp(90px, 10vw, 100px);
@@ -1226,6 +1215,7 @@ footer {
     width: 100%;
     background: #242834;
     color: #e5e5e5;
+    height: fit-content;
 }
 
 .footer-container {
@@ -1342,6 +1332,37 @@ footer {
 .footer-bottom a {
     color: #e5e5e5;
     text-decoration: none;
+}
+
+/* Mobile Footer Layout - 3rd and 4th columns in one row */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+    }
+    
+    /* Column 1 takes full width (spans 2 columns) */
+    .footer-col:nth-child(1) {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+    
+    /* Column 2 takes full width (spans 2 columns) */
+    .footer-col:nth-child(2) {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+    
+    /* Columns 3 and 4 share row 3, each taking 1 column */
+    .footer-col:nth-child(3) {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    
+    .footer-col:nth-child(4) {
+        grid-column: 2;
+        grid-row: 3;
+    }
 }
 
 /* ==================== Responsive ==================== */
