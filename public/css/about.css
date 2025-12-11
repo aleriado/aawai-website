@@ -40,7 +40,7 @@ main {
     display: flex;
     gap: clamp(20px, 4vw, 40px);
     overflow: hidden;
-    padding: clamp(30px, 4vw, 60px);
+    padding: clamp(20px, 4vw, 60px);
     flex-wrap: wrap;
     
     /* Animation initial state */
@@ -149,7 +149,7 @@ main {
     width: 100%;
     max-width: 500px;
     height: clamp(200px, 40vw, 400px);
-    background-image: url('../assets/images/director.avif');
+    background-image: url('../assets/images/ai_bg.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -314,8 +314,14 @@ main {
     transform: scale(1);
 }
 
-.member:hover img {
+/* First member: brightness 1 on hover */
+.member:first-child:hover img {
     filter: brightness(1);
+}
+
+/* Other members: brightness 2 on hover */
+.member:not(:first-child):hover img {
+    filter: brightness(2);
 }
 
 .member-info {
@@ -560,5 +566,9 @@ main {
     .about-left,
     .about-right {
         padding: 0px;
+    }
+
+    .about{
+        padding-inline: 20px;
     }
 }
