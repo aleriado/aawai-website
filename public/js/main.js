@@ -457,8 +457,9 @@ window.addEventListener('load', () => {
     if (!privacyContent) return;
 
     const animatedElements = document.querySelectorAll('.pp-animate');
+    const listItems = document.querySelectorAll('.pp-li-animate');
     
-    if (animatedElements.length === 0) return;
+    if (animatedElements.length === 0 && listItems.length === 0) return;
 
     // Small delay to ensure page is fully rendered
     setTimeout(() => {
@@ -468,6 +469,7 @@ window.addEventListener('load', () => {
             threshold: 0.1
         };
 
+        // Observer for main elements (h2, h3, p, ul)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
@@ -484,6 +486,33 @@ window.addEventListener('load', () => {
             observer.observe(el);
         });
 
+        // Observer for list items with staggered animation
+        const listObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+                    // Get the index of this item within its parent ul
+                    const parentUl = entry.target.closest('ul');
+                    if (parentUl) {
+                        const allItems = Array.from(parentUl.querySelectorAll('.pp-li-animate'));
+                        const itemIndex = allItems.indexOf(entry.target);
+                        
+                        // Stagger animation based on item index
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, itemIndex * 100);
+                    } else {
+                        entry.target.classList.add('visible');
+                    }
+                    listObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe each list item individually
+        listItems.forEach((li) => {
+            listObserver.observe(li);
+        });
+
         // If elements are already visible on load, trigger them immediately
         animatedElements.forEach((el, index) => {
             const rect = el.getBoundingClientRect();
@@ -492,6 +521,26 @@ window.addEventListener('load', () => {
                 setTimeout(() => {
                     el.classList.add('visible');
                 }, index * 100);
+            }
+        });
+
+        // Trigger list items that are already visible
+        listItems.forEach((li, index) => {
+            const rect = li.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
+            if (isVisible && !li.classList.contains('visible')) {
+                const parentUl = li.closest('ul');
+                if (parentUl) {
+                    const allItems = Array.from(parentUl.querySelectorAll('.pp-li-animate'));
+                    const itemIndex = allItems.indexOf(li);
+                    setTimeout(() => {
+                        li.classList.add('visible');
+                    }, itemIndex * 100);
+                } else {
+                    setTimeout(() => {
+                        li.classList.add('visible');
+                    }, index * 100);
+                }
             }
         });
     }, 300);
