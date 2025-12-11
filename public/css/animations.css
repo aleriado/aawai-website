@@ -59,7 +59,7 @@
 /* Parent container initially hidden */
 .hero-buttons {
     opacity: 0;
-    transform: translateY(32px) scale(0.9);
+    transform: translateY(32px);
     filter: none;
     pointer-events: none;
 }
@@ -74,17 +74,12 @@
 @keyframes heroButtonsLift {
     0% {
         opacity: 0;
-        transform: translateY(32px) scale(0.9);
-        filter: none;
-    }
-    65% {
-        opacity: 1;
-        transform: translateY(-6px) scale(1.06);
+        transform: translateY(32px);
         filter: none;
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1.02);
+        transform: translateY(0);
         filter: none;
     }
 }
@@ -92,7 +87,7 @@
 /* ---- Individual button animations ---- */
 .hero-buttons .btn {
     opacity: 0;
-    transform: translateY(26px) scale(0.88);
+    transform: translateY(26px);
     filter: none;
 }
 
@@ -104,17 +99,12 @@
 @keyframes heroButtonRise {
     0% {
         opacity: 0;
-        transform: translateY(26px) scale(0.88);
-        filter: none;
-    }
-    70% {
-        opacity: 1;
-        transform: translateY(-6px) scale(1.08);
+        transform: translateY(26px);
         filter: none;
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1.02);
+        transform: translateY(0);
         filter: none;
     }
 }
