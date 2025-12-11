@@ -252,6 +252,19 @@
     transform: translateY(0);
 }
 
+/* Privacy Policy List Items Animation */
+.pp-li-animate {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s cubic-bezier(.19, 1, .22, 1),
+                transform 0.8s cubic-bezier(.19, 1, .22, 1);
+}
+
+.pp-li-animate.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 /* =================== CHAT BUTTON MOBILE ANIMATIONS =================== */
 
 @keyframes chatButtonFloatPulse {
