@@ -484,7 +484,7 @@ nav {
     display: flex;
     width: 100%;
     height: min(90vh, 900px);
-    background: url("../assets/images/director.avif") center/cover no-repeat fixed;
+    background: url("../assets/images/ai-bg.jpg") center/cover no-repeat fixed;
     position: relative;
     z-index: 2;
 }
